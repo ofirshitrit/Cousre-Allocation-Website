@@ -6,7 +6,8 @@ export default function SelectAlgoForm({selectedAlgorithm, setSelectedAlgorithm}
 
 const handleSubmit = (e) => {
     e.preventDefault();
-    setSelectedAlgorithm(e.tarfet.value)
+    const selectedValue = e.target.elements.algorithmSelect.value;
+    setSelectedAlgorithm(selectedValue);
 }
 
   return (
