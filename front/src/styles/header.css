@@ -45,3 +45,24 @@ button.homeBtn {
 button.homeBtn:hover {
   background: rgba(133, 82, 56, 0.42)
 }
+
+#home-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #FFF;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333333;
+  font-family: 'Dancing Script', cursive;
+  font-weight: bold;
+  width: 90px;
+  height: 40px;
+}
+
+#home-btn:hover {
+  background: rgba(133, 82, 56, 0.42)
+}

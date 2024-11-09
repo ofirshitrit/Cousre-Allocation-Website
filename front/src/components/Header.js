@@ -11,8 +11,8 @@ export default function Header({headerContent, setSelectedAlgorithm, inHomePage}
   return (
     <header>
     <div className="backgroundHeader">
-        {inHomePage === false && <button onClick={handleHomeButton}>Home</button>}
-        <h1>{headerContent}</h1>
+        {inHomePage === false && <button id='home-btn' onClick={handleHomeButton}>Home</button>}
+        <h1 id='header-content'>{headerContent}</h1>
         
     </div>
 </header>

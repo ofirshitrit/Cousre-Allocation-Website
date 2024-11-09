@@ -21,9 +21,9 @@ function App() {
         </>
       )}
       
-      {selectedAlgorithm === "aceei" && <AceeiForm />}
-      {selectedAlgorithm === "manipulation" && <FindManipulationForm />}
-      {selectedAlgorithm === "tabusearch" && <TabuSearchForm />}
+      {selectedAlgorithm === "aceei" && <AceeiForm setSelectedAlgorithm={setSelectedAlgorithm}/>}
+      {selectedAlgorithm === "manipulation" && <FindManipulationForm setSelectedAlgorithm={setSelectedAlgorithm}/>}
+      {selectedAlgorithm === "tabusearch" && <TabuSearchForm setSelectedAlgorithm={setSelectedAlgorithm} />}
 
     </div>
     
