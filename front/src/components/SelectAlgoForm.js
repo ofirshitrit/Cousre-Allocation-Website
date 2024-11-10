@@ -1,12 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "../styles/selectAlgoForm.css"
 
 
 export default function SelectAlgoForm({selectedAlgorithm, setSelectedAlgorithm}) {
+  const [errorMessage, setErrorMessage] = useState("");
+
 
 const handleSubmit = (e) => {
     e.preventDefault();
     const selectedValue = e.target.elements.algorithmSelect.value;
+    if (selectedValue === "") {
+      setErrorMessage("You have to choose an algorithm to continue.");
+      return;
+      
+    }
+    setErrorMessage("");
     setSelectedAlgorithm(selectedValue);
 }
 
@@ -22,6 +30,8 @@ const handleSubmit = (e) => {
               <option value="manipulation">Find Manipulation</option>
               <option value="tabusearch">Tabu Search</option>
           </select>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+
           <button type="submit" id="tryButton">
               Try
               <div className="arrow">
