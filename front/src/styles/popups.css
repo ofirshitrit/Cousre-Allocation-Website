@@ -1,0 +1,60 @@
+
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80vw;
+  height: 80vh;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: auto;
+  overflow: auto; 
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.algo-name {
+  color: #86b9e8;
+  font-family: 'Alef', sans-serif;
+}
+
+.intro-container {
+  border: 1px solid #3f6a72;
+  margin: 10px;
+  width: auto;
+}
+
+.intro-text{
+  margin: 10px 0;
+  font-family: 'Dancing Script', cursive;
+  text-align: center;
+}
+
+
+h4 {
+  font-family: 'Alef', sans-serif;
+  font-size: 18px;
+  color: #86b9e8;
+
+}
+
+li {
+  font-family: 'Dancing Script', cursive;
+  font-size: 14px;
+  color: #666;
+}
