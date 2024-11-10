@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/popups.css";
+import "../../styles/popups.css";
 
 export default function FindManipulationPopup() {
   return (

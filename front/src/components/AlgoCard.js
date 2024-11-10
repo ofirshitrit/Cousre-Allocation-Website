@@ -1,11 +1,10 @@
-import React, {useState} from 'react'
-import Popup from 'reactjs-popup';
-import AceeiPopup from './AceeiPopup';
-import FindManipulationPopup from './FindManipulationPopup';
-import TabuSearchPopup from './TabuSearchPopup';
+import React, { useState } from "react";
+import Popup from "reactjs-popup";
+import AceeiPopup from "./ACEEI/AceeiPopup";
+import FindManipulationPopup from "./Find Manipulation/FindManipulationPopup";
+import TabuSearchPopup from "./Tabu Search/TabuSearchPopup";
 
-export default function AlgoCard({algoName, algoDetailes}) {
-
+export default function AlgoCard({ algoName, algoDetailes }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const openPopup = () => {
@@ -19,11 +18,11 @@ export default function AlgoCard({algoName, algoDetailes}) {
   return (
     <>
       <div className="algoContainer">
-        <h3 id="titleOfAlgorCard">
-            {algoName}
-        </h3>
+        <h3 id="titleOfAlgorCard">{algoName}</h3>
         <p>{algoDetailes}</p>
-        <button className="learnMoreBtn" onClick={openPopup}>Learn More</button>
+        <button className="learnMoreBtn" onClick={openPopup}>
+          Learn More
+        </button>
       </div>
 
       {/* Popup modal */}
@@ -32,19 +31,17 @@ export default function AlgoCard({algoName, algoDetailes}) {
           <button className="close" onClick={closePopup}>
             &times;
           </button>
-          {algoName === 'ACEEI' ? (
+          {algoName === "ACEEI" ? (
             <AceeiPopup />
-          ) : algoName === 'Find Manipulation' ? (
+          ) : algoName === "Find Manipulation" ? (
             <FindManipulationPopup />
-          ) : algoName === 'Tabu Search' ? (
+          ) : algoName === "Tabu Search" ? (
             <TabuSearchPopup />
           ) : (
-      
             <p>No additional information available for this algorithm.</p>
           )}
-          
         </div>
       </Popup>
     </>
-  )
+  );
 }
