@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import Popup from 'reactjs-popup';
 import AceeiPopup from './AceeiPopup';
+import FindManipulationPopup from './FindManipulationPopup';
+import TabuSearchPopup from './TabuSearchPopup';
 
 export default function AlgoCard({algoName, algoDetailes}) {
 
@@ -32,7 +34,12 @@ export default function AlgoCard({algoName, algoDetailes}) {
           </button>
           {algoName === 'ACEEI' ? (
             <AceeiPopup />
+          ) : algoName === 'Find Manipulation' ? (
+            <FindManipulationPopup />
+          ) : algoName === 'Tabu Search' ? (
+            <TabuSearchPopup />
           ) : (
+      
             <p>No additional information available for this algorithm.</p>
           )}
           

@@ -14,7 +14,7 @@
 .close {
   color: #aaa;
   float: right;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: bold;
   background-color: transparent;
   border: none;
@@ -48,13 +48,13 @@
 
 h4 {
   font-family: 'Alef', sans-serif;
-  font-size: 18px;
+  font-size: 23px;
   color: #86b9e8;
 
 }
 
 li {
   font-family: 'Dancing Script', cursive;
-  font-size: 14px;
+  font-size: 18px;
   color: #666;
 }
