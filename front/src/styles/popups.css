@@ -9,6 +9,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   margin: auto;
   overflow: auto; 
+
 }
 
 .close {
@@ -26,6 +27,7 @@
   text-decoration: none;
   cursor: pointer;
 }
+
 
 
 .algo-name {
@@ -57,4 +59,8 @@ li {
   font-family: 'Dancing Script', cursive;
   font-size: 18px;
   color: #666;
+}
+
+ol {
+  list-style-type:circle;
 }
