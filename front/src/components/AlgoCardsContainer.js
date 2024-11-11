@@ -1,6 +1,6 @@
 import React from 'react';
 import AlgoCard from './AlgoCard';
-import "../styles/algoCards.css"
+import "../styles/algo-cards.css"
 
 
 export default function AlgoCardsContainer() {

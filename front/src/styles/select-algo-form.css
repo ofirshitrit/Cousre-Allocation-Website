@@ -11,7 +11,7 @@ form {
   color: #333;
 }
 
-label, select  {
+.select-algo, select  {
   display: block;
   margin: 10px auto;
   font-size: 1.2em;

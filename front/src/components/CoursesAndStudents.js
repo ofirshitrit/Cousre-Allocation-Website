@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../styles/courses-and-students.css'
 
 export default function CoursesAndStudents() {
   const [isNumCoursesFilled, setIsNumCoursesFilled] = useState(false);
@@ -8,6 +9,9 @@ export default function CoursesAndStudents() {
 
   const [numOfStudents, setNumOfStudents] = useState(0);
   const [studentFields, setStudentFields] = useState([]);
+
+  const [errorMessage, setErrorMessage] = useState("");
+
 
   const handleCourseNumberChange = (e) => {
     setNumOfCourses(parseInt(e.target.value) || 0);
@@ -42,25 +46,34 @@ export default function CoursesAndStudents() {
   };
 
   const addStudentFields = () => {
+
+    if (isNumCoursesFilled === false) {
+      setErrorMessage(`You have to fill the courses input first and click on the \u2714 button;.`);
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
+      return;
+    }
+
     const fields = (
       <div className="studentFields">
         {Array.from({ length: numOfStudents }, (_, i) => (
           <div key={i} className="studentField">
             <div className="studentLabel">Student {i + 1}</div>
-            <div className="fieldGroup">
-              <label className="inputLabel">Budget: </label>
+            <div className="budget-container">
+              <label className="labelBudget">Student's Budget: </label>
               <input type="number" min="1" required />
             </div>
             <div className="fieldGroup">
-              <label className="inputLabel">Number of Courses to Take: </label>
+              <label className="labelCoursesToTake">Number of courses to take: </label>
               <input type="number" min="1" required />
             </div>
             <div className="ratingsGroup">
-              <label className="inputLabel">Ratings for Courses: </label>
+              <label className="labelRating">Ratings for Courses: </label>
               <div className="ratingRow">
                 {Array.from({ length: numOfCourses }, (_, j) => (
                   <div key={j} className="courseRating">
-                    <label className="inputLabel">c{j + 1}: </label>
+                    <label className="labelCourseName">c{j + 1}: </label>
                     <input type="number" min="1" required />
                   </div>
                 ))}
@@ -115,6 +128,8 @@ export default function CoursesAndStudents() {
           &#10004;
         </button>
       </div>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
       <div id="studentFields">
         {/* Fields for students will be added dynamically */}
         {studentFields}
