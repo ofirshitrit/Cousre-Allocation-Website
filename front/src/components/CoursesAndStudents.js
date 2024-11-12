@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import '../styles/courses-and-students.css'
 
 export default function CoursesAndStudents() {
-  const [isNumCoursesFilled, setIsNumCoursesFilled] = useState(false);
+  const [isCourseDataComplete, setIsCourseDataComplete] = useState(false);
 
   const [numOfCourses, setNumOfCourses] = useState(0);
   const [courseFields, setCourseFields] = useState([]);
@@ -23,7 +23,7 @@ export default function CoursesAndStudents() {
 
   const addCourseFields = () => {
     if (numOfCourses > 0) {
-      setIsNumCoursesFilled(true);
+      setIsCourseDataComplete(true);
 
       const fields = (
         <div className="courseFields">
@@ -47,7 +47,7 @@ export default function CoursesAndStudents() {
 
   const addStudentFields = () => {
 
-    if (isNumCoursesFilled === false) {
+    if (isCourseDataComplete === false) {
       setErrorMessage(`You have to fill the courses input first and click on the \u2714 button;.`);
       setTimeout(() => {
         setErrorMessage('');
@@ -121,7 +121,7 @@ export default function CoursesAndStudents() {
           min="1"
           required
           className="numOfStudentsInput"
-          disabled={!isNumCoursesFilled}
+          disabled={!isCourseDataComplete}
           onChange={handleStudentNumberChange}
         />
         <button type="button" onClick={addStudentFields} class="V-Btn">
