@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../styles/courses-and-students.css'
+import "../styles/courses-and-students.css";
 
 export default function CoursesAndStudents() {
   const [isCourseDataComplete, setIsCourseDataComplete] = useState(false);
@@ -11,7 +11,6 @@ export default function CoursesAndStudents() {
   const [studentFields, setStudentFields] = useState([]);
 
   const [errorMessage, setErrorMessage] = useState("");
-
 
   const handleCourseNumberChange = (e) => {
     setNumOfCourses(parseInt(e.target.value) || 0);
@@ -29,7 +28,7 @@ export default function CoursesAndStudents() {
         <div className="courseFields">
           {Array.from({ length: numOfCourses }, (_, i) => (
             <div className="courseField" key={i}>
-              <label>Course {i + 1} Capacity: </label>
+              <label className="capacityLabel">Course {i + 1} Capacity: </label>
               <input
                 type="number"
                 min="1"
@@ -46,11 +45,12 @@ export default function CoursesAndStudents() {
   };
 
   const addStudentFields = () => {
-
     if (isCourseDataComplete === false) {
-      setErrorMessage(`You have to fill the courses input first and click on the \u2714 button;.`);
+      setErrorMessage(
+        `You have to fill the courses input first and click on the \u2714 button;.`
+      );
       setTimeout(() => {
-        setErrorMessage('');
+        setErrorMessage("");
       }, 5000);
       return;
     }
@@ -62,25 +62,49 @@ export default function CoursesAndStudents() {
             <div className="studentLabel">Student {i + 1}</div>
             <div className="budget-container">
               <label className="labelBudget">Student's Budget: </label>
-              <input type="number" min="1" required />
+              <input type="number" min="1" className="inputBudget" required />
             </div>
-            <div className="fieldGroup">
-              <label className="labelCoursesToTake">Number of courses to take: </label>
-              <input type="number" min="1" required />
+            <div className="num-of-courses-container">
+              <label className="labelCoursesToTake">
+                Number of courses to take:{" "}
+              </label>
+              <input
+                type="number"
+                min="1"
+                className="inputCoursesToTake"
+                required
+              />
             </div>
+
             <div className="ratingsGroup">
               <label className="labelRating">Ratings for Courses: </label>
-              <div className="ratingRow">
-                {Array.from({ length: numOfCourses }, (_, j) => (
-                  <div key={j} className="courseRating">
-                    <label className="labelCourseName">c{j + 1}: </label>
-                    <input type="number" min="1" required />
+              {Array.from(
+                { length: Math.ceil(numOfCourses / 3) },
+                (_, rowIndex) => (
+                  <div className="ratingRow" key={rowIndex}>
+                    {Array.from({ length: 3 }, (_, j) => {
+                      const courseIndex = rowIndex * 3 + j;
+                      return courseIndex < numOfCourses ? (
+                        <div key={courseIndex} className="courseRating">
+                          <label className="labelCourseName">
+                            c{courseIndex + 1}:{" "}
+                          </label>
+                          <input
+                            type="number"
+                            min="1"
+                            className="inputCourseName"
+                            required
+                          />
+                        </div>
+                      ) : null;
+                    })}
                   </div>
-                ))}
-              </div>
+                )
+              )}
             </div>
           </div>
-        ))};
+        ))}
+        ;
       </div>
     );
     setStudentFields(fields);
@@ -89,7 +113,7 @@ export default function CoursesAndStudents() {
   return (
     <div className="CoursesAndStudents-container">
       <div class="fieldsContainer">
-        <label for="numberOfCourses">Number of Courses:</label>
+        <label for="numberOfCourses">Number Of Courses:</label>
         <input
           type="number"
           id="numberOfCourses"
@@ -113,7 +137,7 @@ export default function CoursesAndStudents() {
         After you insert the number of courses, click on the &#10004; button.
       </p>
       <div class="fieldsContainer">
-        <label for="numberOfStudents">Number of Students:</label>
+        <label for="numberOfStudents">Number Of Students:</label>
         <input
           type="number"
           id="numberOfStudents"

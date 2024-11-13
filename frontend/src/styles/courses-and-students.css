@@ -15,10 +15,8 @@
 
 }
 
-
-
 /* Input Styles */
-.numOfCoursesInput, .capacityInput, .numOfStudentsInput {
+.numOfCoursesInput, .capacityInput, .numOfStudentsInput, .inputBudget, .inputCoursesToTake, .inputCourseName {
   width: 50px;
   height: 25px;
   font-size: 1.2em;
@@ -47,6 +45,8 @@
   justify-content: center;
   gap: 20px;
   margin: 20px auto;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1em;
 }
 
 /* Course Field Styles */
@@ -68,7 +68,6 @@
 /* Student Field Specific Styles */
 .studentField {
   font-size: 20px;
-  font-weight: bold;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -82,12 +81,42 @@
 
 }
 
-.labelBudget , .labelCoursesToTake{
+.labelBudget , .labelCoursesToTake, .capacityLabel, .studentLabel{
   margin: 10px auto;
   font-size: 1em;
   font-family: 'Dancing Script', cursive;
   color: #333;
 }
+
+.labelBudget {
+  margin-right: 5px;
+}
+
+.capacityLabel {
+  font-size: 1.2em;
+}
+
+.num-of-courses-container {
+  margin-bottom: 5px;
+}
+
+
+.labelRating {
+  margin-left: 30px;
+}
+
+.ratingRow {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.courseRating {
+  margin-left: 5px;
+}
+
+
 
 /*
 label {
