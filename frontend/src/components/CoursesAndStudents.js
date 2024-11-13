@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import "../styles/courses-and-students.css";
 
-export default function CoursesAndStudents() {
+export default function CoursesAndStudents({
+  numOfCourses,
+  numOfStudents,
+  setNumOfCourses,
+  setCoursesCapacities,
+  setNumOfStudents,
+  setBudgets,
+  setCoursesToTake,
+  setRatings,
+}) {
   const [isCourseDataComplete, setIsCourseDataComplete] = useState(false);
 
-  const [numOfCourses, setNumOfCourses] = useState(0);
   const [courseFields, setCourseFields] = useState([]);
 
-  const [numOfStudents, setNumOfStudents] = useState(0);
   const [studentFields, setStudentFields] = useState([]);
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -18,6 +25,17 @@ export default function CoursesAndStudents() {
 
   const handleStudentNumberChange = (e) => {
     setNumOfStudents(parseInt(e.target.value) || 0);
+  };
+
+  const handleCousresCapacitiesChange = (courseIndex, e) => {
+    setCoursesCapacities((prevState) => {
+      const newState = {
+        ...prevState,
+        [`c${courseIndex}`]: parseInt(e.target.value) || 0,
+      };
+      console.log(newState);
+      return newState;
+    });
   };
 
   const addCourseFields = () => {
@@ -35,6 +53,7 @@ export default function CoursesAndStudents() {
                 name={`c${i + 1}Capacity`}
                 className="capacityInput"
                 required
+                onChange={(e) => handleCousresCapacitiesChange(i + 1, e)}
               />
             </div>
           ))}
@@ -42,6 +61,44 @@ export default function CoursesAndStudents() {
       );
       setCourseFields(fields);
     }
+  };
+
+  const handleBudgetsChange = (studentIndex, e) => {
+    setBudgets((prevState) => {
+      const newState = {
+        ...prevState,
+        [`s${studentIndex}`]: parseFloat(e.target.value) || 0,
+      };
+      console.log(newState);
+      return newState;
+    });
+  };
+
+  const handleNumberOfCoursesToTakeChange = (studentIndex, e) => {
+    setCoursesToTake((prevState) => {
+      const newState = {
+        ...prevState,
+        [`s${studentIndex}`]: parseInt(e.target.value) || 0,
+      };
+      console.log(newState);
+      return newState;
+    });
+  };
+
+  const handleRatingsChange = (studentIndex, courseIndex, e) => {
+    const rating = parseInt(e.target.value) || 0;
+    setRatings((prevState) => {
+      const newState = { ...prevState };
+
+      if (!newState[`s${studentIndex}`]) {
+        newState[`s${studentIndex}`] = {};
+      }
+
+      newState[`s${studentIndex}`][`c${courseIndex}`] = rating;
+
+      console.log(newState);
+      return newState;
+    });
   };
 
   const addStudentFields = () => {
@@ -62,17 +119,24 @@ export default function CoursesAndStudents() {
             <div className="studentLabel">Student {i + 1}</div>
             <div className="budget-container">
               <label className="labelBudget">Student's Budget: </label>
-              <input type="number" min="1" className="inputBudget" required />
+              <input
+                type="number"
+                min="1"
+                className="inputBudget"
+                required
+                onChange={(e) => handleBudgetsChange(i + 1, e)}
+              />
             </div>
             <div className="num-of-courses-container">
               <label className="labelCoursesToTake">
-                Number of courses to take:{" "}
+                Number of courses to take:
               </label>
               <input
                 type="number"
                 min="1"
                 className="inputCoursesToTake"
                 required
+                onChange={(e) => handleNumberOfCoursesToTakeChange(i + 1, e)}
               />
             </div>
 
@@ -94,6 +158,13 @@ export default function CoursesAndStudents() {
                             min="1"
                             className="inputCourseName"
                             required
+                            onChange={(e) =>
+                              handleRatingsChange(
+                                rowIndex + 1,
+                                courseIndex + 1,
+                                e
+                              )
+                            }
                           />
                         </div>
                       ) : null;
@@ -112,7 +183,7 @@ export default function CoursesAndStudents() {
 
   return (
     <div className="CoursesAndStudents-container">
-      <div class="fieldsContainer">
+      <div className="fieldsContainer">
         <label for="numberOfCourses">Number Of Courses:</label>
         <input
           type="number"
@@ -148,7 +219,7 @@ export default function CoursesAndStudents() {
           disabled={!isCourseDataComplete}
           onChange={handleStudentNumberChange}
         />
-        <button type="button" onClick={addStudentFields} class="V-Btn">
+        <button type="button" onClick={addStudentFields} className="V-Btn">
           &#10004;
         </button>
       </div>

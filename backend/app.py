@@ -7,8 +7,8 @@ CORS(app)
 # Route to process form submission
 @app.route('/process', methods=['POST'])
 def process_form():
-    # courses_data = request.form.to_dict()
-    courses_data = "connection successful"
+    courses_data = request.form.to_dict()
+    # courses_data = "connection successful"
     
     print("Received form data:", courses_data)
     

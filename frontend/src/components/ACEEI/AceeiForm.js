@@ -8,14 +8,30 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
   const [results, setResults] = useState(null);
   const [displayResults, setDisplayResults] = useState(false);
 
+  const [numOfCourses, setNumOfCourses] = useState(0);
+  const [coursesCapacities, setCoursesCapacities] = useState({});
+
+  const [numOfStudents, setNumOfStudents] = useState(0);
+  const [budgets, setBudgets] = useState({});
+  const [coursesToTake, setCoursesToTake] = useState({});
+  const [ratings, setRatings] = useState({});
+
   const handleSubmit = async (e) => {
     console.log("in handleSubmit");
 
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault(); 
 
-    // Gather form data
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
+    // const formData = new FormData(e.target);
+    const formData = {
+      "numOfCourses": numOfCourses,
+      "coursesCapacities": coursesCapacities,
+      "numOfStudents": numOfStudents,
+      "budgets":budgets,
+      "coursesToTake": coursesToTake,
+      // "ratings": ratings
+    }
+
+    const data = Object.fromEntries(Object.entries(formData));
 
     try {
       // Send data to Flask backend
@@ -31,7 +47,7 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
       if (response.ok) {
         const jsonResponse = await response.json();
         setResults(jsonResponse.data); // Store the returned data in state
-        setDisplayResults(true)
+        setDisplayResults(true);
       } else {
         console.error("Failed to submit form.");
       }
@@ -62,12 +78,23 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
             </div>
             <input type="submit" value="Run" />
 
-            <CoursesAndStudents />
+            <CoursesAndStudents
+              numOfCourses={numOfCourses}
+              numOfStudents={numOfStudents}
+              setNumOfCourses={setNumOfCourses}
+              setCoursesCapacities={setCoursesCapacities}
+              setNumOfStudents={setNumOfStudents}
+              setBudgets={setBudgets}
+              setCoursesToTake={setCoursesToTake}
+              setRatings={setRatings}
+            />
           </form>
         </>
       )}
 
-      {displayResults === true && <Results data={results} />}
+      {displayResults === true && (
+        <Results data={results} setSelectedAlgorithm={setSelectedAlgorithm} />
+      )}
     </>
   );
 }
