@@ -33,7 +33,6 @@ export default function CoursesAndStudents({
         ...prevState,
         [`c${courseIndex}`]: parseInt(e.target.value) || 0,
       };
-      console.log(newState);
       return newState;
     });
   };
@@ -69,7 +68,6 @@ export default function CoursesAndStudents({
         ...prevState,
         [`s${studentIndex}`]: parseFloat(e.target.value) || 0,
       };
-      console.log(newState);
       return newState;
     });
   };
@@ -80,7 +78,6 @@ export default function CoursesAndStudents({
         ...prevState,
         [`s${studentIndex}`]: parseInt(e.target.value) || 0,
       };
-      console.log(newState);
       return newState;
     });
   };
@@ -99,6 +96,7 @@ export default function CoursesAndStudents({
       console.log(newState);
       return newState;
     });
+    
   };
 
   const addStudentFields = () => {
@@ -160,7 +158,7 @@ export default function CoursesAndStudents({
                             required
                             onChange={(e) =>
                               handleRatingsChange(
-                                rowIndex + 1,
+                                i + 1,
                                 courseIndex + 1,
                                 e
                               )
@@ -184,7 +182,7 @@ export default function CoursesAndStudents({
   return (
     <div className="CoursesAndStudents-container">
       <div className="fieldsContainer">
-        <label for="numberOfCourses">Number Of Courses:</label>
+        <label>Number Of Courses:</label>
         <input
           type="number"
           id="numberOfCourses"
@@ -194,7 +192,7 @@ export default function CoursesAndStudents({
           className="numOfCoursesInput"
           onChange={handleCourseNumberChange}
         />
-        <button type="button" onClick={addCourseFields} class="V-Btn">
+        <button type="button" onClick={addCourseFields} className="V-Btn">
           &#10004;
         </button>
       </div>
@@ -207,8 +205,8 @@ export default function CoursesAndStudents({
         part. <br />
         After you insert the number of courses, click on the &#10004; button.
       </p>
-      <div class="fieldsContainer">
-        <label for="numberOfStudents">Number Of Students:</label>
+      <div className="fieldsContainer">
+        <label>Number Of Students:</label>
         <input
           type="number"
           id="numberOfStudents"

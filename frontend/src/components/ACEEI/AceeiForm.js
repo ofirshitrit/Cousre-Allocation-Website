@@ -21,15 +21,16 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
 
     e.preventDefault(); 
 
-    // const formData = new FormData(e.target);
     const formData = {
-      "numOfCourses": numOfCourses,
-      "coursesCapacities": coursesCapacities,
-      "numOfStudents": numOfStudents,
-      "budgets":budgets,
-      "coursesToTake": coursesToTake,
-      // "ratings": ratings
+      numOfCourses,
+      coursesCapacities,
+      numOfStudents,
+      budgets,
+      coursesToTake,
+      ratings
     }
+
+    
 
     const data = Object.fromEntries(Object.entries(formData));
 
@@ -43,10 +44,9 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
         body: JSON.stringify(data),
       });
 
-      // Check response status and set results data
       if (response.ok) {
         const jsonResponse = await response.json();
-        setResults(jsonResponse.data); // Store the returned data in state
+        setResults(jsonResponse.answer); 
         setDisplayResults(true);
       } else {
         console.error("Failed to submit form.");
@@ -88,12 +88,13 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
               setCoursesToTake={setCoursesToTake}
               setRatings={setRatings}
             />
+            
           </form>
         </>
       )}
 
       {displayResults === true && (
-        <Results data={results} setSelectedAlgorithm={setSelectedAlgorithm} />
+        <Results data={results} setSelectedAlgorithm={setSelectedAlgorithm} algoName={"ACEEI"} />
       )}
     </>
   );

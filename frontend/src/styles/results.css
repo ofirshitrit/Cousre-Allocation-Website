@@ -1,0 +1,38 @@
+.results-container {
+  display: grid;
+  text-align: center;
+  justify-content: center;
+}
+
+.table-container {
+  width: 80%;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  justify-content: center;
+  margin-left: 150px;
+  margin-top: 10px;
+}   
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  font-size: 20px;
+}
+
+th {
+  background-color: #f8f8f8;
+  width: 1500px;
+
+}
