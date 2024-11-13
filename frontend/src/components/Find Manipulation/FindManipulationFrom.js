@@ -1,7 +1,8 @@
 import React from "react";
 import Header from "../Header";
 import CoursesAndStudents from "../CoursesAndStudents";
-
+// TODO: add all the FindManipulationForm parameters
+// TODO: fix the GUI
 export default function FindManipulationForm({ setSelectedAlgorithm }) {
   return (
     <>

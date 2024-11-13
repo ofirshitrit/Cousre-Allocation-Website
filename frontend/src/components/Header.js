@@ -1,6 +1,6 @@
 import React from 'react'
 import "../styles/header.css"
-
+// TODO: fix the GUI
 export default function Header({headerContent, setSelectedAlgorithm, inHomePage}) {
 
   const handleHomeButton = () => {

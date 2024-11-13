@@ -4,6 +4,9 @@ import "../../styles/forms.css";
 import CoursesAndStudents from "../CoursesAndStudents";
 import Results from "../Results";
 
+// TODO: add all the aceei parameters
+// TODO: fix the GUI
+
 export default function AceeiForm({ setSelectedAlgorithm }) {
   const [results, setResults] = useState(null);
   const [displayResults, setDisplayResults] = useState(false);

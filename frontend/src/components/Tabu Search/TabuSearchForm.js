@@ -1,7 +1,8 @@
 import React from "react";
 import Header from "../Header";
 import CoursesAndStudents from "../CoursesAndStudents";
-
+// TODO: add all the TabuSearchForm parameters
+// TODO: fix the GUI
 export default function TabuSearchForm({ setSelectedAlgorithm }) {
   return (
     <>

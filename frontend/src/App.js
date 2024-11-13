@@ -6,7 +6,7 @@ import { useState } from "react";
 import TabuSearchForm from "./components/Tabu Search/TabuSearchForm";
 import FindManipulationForm from "./components/Find Manipulation/FindManipulationFrom";
 import AceeiForm from "./components/ACEEI/AceeiForm";
-
+// TODO: CHANGE THE RENDERING
 function App() {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState("");
 

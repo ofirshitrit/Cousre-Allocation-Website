@@ -1,6 +1,6 @@
 import React from "react";
 import '../../styles/popups.css'
-
+// TODO: fix the GUI
 export default function TabuSearchPopup() {
   return (
     <div className="popup-content">
