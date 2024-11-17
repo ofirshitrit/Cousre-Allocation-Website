@@ -11,7 +11,7 @@ form {
   color: #333;
 }
 
-.select-algo, select  {
+.select-algo, #algorithmSelect  {
   display: block;
   margin: 10px auto;
   font-size: 1.2em;
@@ -20,7 +20,7 @@ form {
 }
 
 
-select {
+#algorithmSelect {
   width: 10em;
   height: 2.5em;
   padding: 10px;

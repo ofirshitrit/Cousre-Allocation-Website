@@ -50,7 +50,7 @@ export default function CoursesAndStudents({
                 type="number"
                 min="1"
                 name={`c${i + 1}Capacity`}
-                className="capacityInput"
+                className="capacity-input"
                 required
                 onChange={(e) => handleCousresCapacitiesChange(i + 1, e)}
               />
@@ -120,7 +120,7 @@ export default function CoursesAndStudents({
               <input
                 type="number"
                 min="1"
-                className="inputBudget"
+                className="input-budget"
                 required
                 onChange={(e) => handleBudgetsChange(i + 1, e)}
               />
@@ -132,7 +132,7 @@ export default function CoursesAndStudents({
               <input
                 type="number"
                 min="1"
-                className="inputCoursesToTake"
+                className="input-courses-to-take"
                 required
                 onChange={(e) => handleNumberOfCoursesToTakeChange(i + 1, e)}
               />
@@ -154,7 +154,7 @@ export default function CoursesAndStudents({
                           <input
                             type="number"
                             min="1"
-                            className="inputCourseName"
+                            className="input-course-name"
                             required
                             onChange={(e) =>
                               handleRatingsChange(
@@ -180,8 +180,8 @@ export default function CoursesAndStudents({
   };
 
   return (
-    <div className="CoursesAndStudents-container">
-      <div className="fieldsContainer">
+    <div className="courses-and-students-container">
+      <div className="fields-container">
         <label>Number Of Courses:</label>
         <input
           type="number"
@@ -189,7 +189,7 @@ export default function CoursesAndStudents({
           name="numberOfCourses"
           min="1"
           required
-          className="numOfCoursesInput"
+          className="num-of-courses-input"
           onChange={handleCourseNumberChange}
         />
         <button type="button" onClick={addCourseFields} className="V-Btn">
@@ -205,7 +205,7 @@ export default function CoursesAndStudents({
         part. <br />
         After you insert the number of courses, click on the &#10004; button.
       </p>
-      <div className="fieldsContainer">
+      <div className="fields-container">
         <label>Number Of Students:</label>
         <input
           type="number"
@@ -213,7 +213,7 @@ export default function CoursesAndStudents({
           name="numberOfStudents"
           min="1"
           required
-          className="numOfStudentsInput"
+          className="num-of-students-input"
           disabled={!isCourseDataComplete}
           onChange={handleStudentNumberChange}
         />

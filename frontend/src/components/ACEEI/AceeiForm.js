@@ -3,6 +3,7 @@ import Header from "../Header";
 import "../../styles/forms.css";
 import CoursesAndStudents from "../CoursesAndStudents";
 import Results from "../Results";
+import AceeiParameters from "./AceeiParameters";
 
 // TODO: add all the aceei parameters
 // TODO: fix the GUI
@@ -19,6 +20,10 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
   const [coursesToTake, setCoursesToTake] = useState({});
   const [ratings, setRatings] = useState({});
 
+  const [epsilon, setEpsilon] = useState(0.001);
+  const [delta, setDelate] = useState(0.001);
+  const [eftbStatus, setEftbStatus] = useState("no-eftb");
+
   const handleSubmit = async (e) => {
     console.log("in handleSubmit");
 
@@ -30,13 +35,17 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
       numOfStudents,
       budgets,
       coursesToTake,
-      ratings
+      ratings,
+      epsilon,
+      delta,
+      eftbStatus
     }
 
     
 
     const data = Object.fromEntries(Object.entries(formData));
-
+    console.log(`EPSOLIN: ${data.epsilon}, DELTA: ${data.delta}, EFTB: ${data.eftbStatus}`);
+    
     try {
       // Send data to Flask backend
       const response = await fetch("http://127.0.0.1:5000/process", {
@@ -91,6 +100,13 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
               setCoursesToTake={setCoursesToTake}
               setRatings={setRatings}
             />
+
+            <AceeiParameters 
+            setEpsilon={setEpsilon}
+            setDelate={setDelate}
+            setEftbStatus={setEftbStatus}
+
+             />
             
           </form>
         </>
