@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Header from "../Header";
+import '../../styles/forms.css'
 import CoursesAndStudents from "../CoursesAndStudents";
 import Results from "../Results";
+import TabuSearchParameters from "./TabuSearchParameters";
 
-// TODO: add all the TabuSearchForm parameters
 // TODO: fix the GUI
 export default function TabuSearchForm({ setSelectedAlgorithm }) {
   const [results, setResults] = useState(null);
@@ -17,6 +18,9 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
   const [coursesToTake, setCoursesToTake] = useState({});
   const [ratings, setRatings] = useState({});
 
+  const [beta, setBeta] = useState(1);
+  const [deltas, setDeltas] = useState([])
+
   const handleSubmit = async (e) => {
     console.log("in handleSubmit");
 
@@ -29,6 +33,8 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
       budgets,
       coursesToTake,
       ratings,
+      beta,
+      deltas
     };
 
     const data = Object.fromEntries(Object.entries(formData));
@@ -54,7 +60,7 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
       console.error("Error submitting form:", error);
     }
   };
-  
+
   return (
     <>
       {displayResults === false && (
@@ -88,7 +94,8 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
               setCoursesToTake={setCoursesToTake}
               setRatings={setRatings}
             />
-            
+
+            <TabuSearchParameters setBeta={setBeta} deltas={deltas} setDeltas={setDeltas} />
           </form>
         </>
       )}

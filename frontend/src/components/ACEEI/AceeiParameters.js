@@ -1,5 +1,4 @@
 import React from "react";
-import "../../styles/aceei-parameters.css";
 
 export default function AceeiParameters({setEpsilon,setDelate,setEftbStatus}) {
   

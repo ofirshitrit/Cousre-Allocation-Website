@@ -5,7 +5,6 @@ import CoursesAndStudents from "../CoursesAndStudents";
 import Results from "../Results";
 import AceeiParameters from "./AceeiParameters";
 
-// TODO: add all the aceei parameters
 // TODO: fix the GUI
 
 export default function AceeiForm({ setSelectedAlgorithm }) {
@@ -44,7 +43,6 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
     
 
     const data = Object.fromEntries(Object.entries(formData));
-    console.log(`EPSOLIN: ${data.epsilon}, DELTA: ${data.delta}, EFTB: ${data.eftbStatus}`);
     
     try {
       // Send data to Flask backend

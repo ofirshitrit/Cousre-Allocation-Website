@@ -48,12 +48,24 @@
 
 }
 
-.courses-and-students-container, .aceei-parameters {
+.courses-and-students-container, .aceei-parameters , .tabu-search-parameters{
   display: flex;
   align-items: center;  
   flex-direction: column; 
   justify-content: center;          
 
+}
+
+.epsilon-input, .delta-input, .beta-input{
+  width: 85px;
+  height: 25px;
+  font-size: 1em;
+}
+
+.eftb-input {
+  width: 190px;
+  height: 40px;
+  font-size: 1em;
 }
 
 
