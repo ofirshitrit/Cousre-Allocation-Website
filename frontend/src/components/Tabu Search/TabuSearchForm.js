@@ -27,14 +27,13 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
     e.preventDefault();
 
     const formData = {
-      numOfCourses,
       coursesCapacities,
-      numOfStudents,
       budgets,
       coursesToTake,
       ratings,
       beta,
-      deltas
+      deltas,
+      "algoName": "Tabu Search"
     };
 
     const data = Object.fromEntries(Object.entries(formData));
@@ -51,7 +50,7 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
 
       if (response.ok) {
         const jsonResponse = await response.json();
-        setResults(jsonResponse.answer);
+        setResults(jsonResponse.results);
         setDisplayResults(true);
       } else {
         console.error("Failed to submit form.");

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 export default function TabuSearchParameters({setBeta, deltas, setDeltas}) {
   const [deltaInputs, setDeltaInputs] = useState([]);
@@ -32,9 +32,6 @@ export default function TabuSearchParameters({setBeta, deltas, setDeltas}) {
     setDeltas(updatedDeltas);
   }
  
-  useEffect(() => {
-    console.log('Deltas updated:', deltas);
-  }, [deltas]);
 
   return (
     <div className='tabu-search-parameters'>
@@ -71,8 +68,6 @@ export default function TabuSearchParameters({setBeta, deltas, setDeltas}) {
             onChange={(e) => handleDeltaChange(e, index + 1)} 
             required 
           />
-          <button type="button" onClick={addDelta} className="addDeltaBtn">Add Delta</button>
-
           <button 
             type="button" 
             onClick={() => removeDelta(index)} 

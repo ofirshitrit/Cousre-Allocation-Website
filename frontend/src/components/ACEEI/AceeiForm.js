@@ -29,15 +29,14 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
     e.preventDefault(); 
 
     const formData = {
-      numOfCourses,
       coursesCapacities,
-      numOfStudents,
       budgets,
       coursesToTake,
       ratings,
       epsilon,
       delta,
-      eftbStatus
+      eftbStatus,
+      "algoName": "ACEEI"
     }
 
     
@@ -56,7 +55,7 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
 
       if (response.ok) {
         const jsonResponse = await response.json();
-        setResults(jsonResponse.answer); 
+        setResults(jsonResponse.results); 
         setDisplayResults(true);
       } else {
         console.error("Failed to submit form.");
