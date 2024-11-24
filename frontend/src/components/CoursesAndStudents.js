@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
 import "../styles/courses-and-students.css";
+import StudentField from './StudentField'
+import CourseField from "./CourseField";
 
 export default function CoursesAndStudents({
   numOfCourses,
@@ -10,6 +12,8 @@ export default function CoursesAndStudents({
   setBudgets,
   setCoursesToTake,
   setRatings,
+  coursesCapacities,
+  isRandom
 }) {
   const [isCourseDataComplete, setIsCourseDataComplete] = useState(false);
 
@@ -37,24 +41,21 @@ export default function CoursesAndStudents({
     });
   };
 
-  const addCourseFields = () => {
+  const addCourseFields =  () => {
+    
     if (numOfCourses > 0) {
       setIsCourseDataComplete(true);
-
+      console.log(`courses capacities: ${coursesCapacities}`);
+      
       const fields = (
         <div className="courseFields">
           {Array.from({ length: numOfCourses }, (_, i) => (
-            <div className="courseField" key={i}>
-              <label className="capacityLabel">Course {i + 1} Capacity: </label>
-              <input
-                type="number"
-                min="1"
-                name={`c${i + 1}Capacity`}
-                className="capacity-input"
-                required
-                onChange={(e) => handleCousresCapacitiesChange(i + 1, e)}
-              />
-            </div>
+            <CourseField 
+              key={i}
+              courseIndex = {i+1}
+              coursesCapacities = {coursesCapacities}
+              handleCousresCapacitiesChange = {handleCousresCapacitiesChange}
+            />
           ))}
         </div>
       );
@@ -102,82 +103,33 @@ export default function CoursesAndStudents({
   const addStudentFields = () => {
     if (isCourseDataComplete === false) {
       setErrorMessage(
-        `You have to fill the courses input first and click on the \u2714 button;.`
+        `You have to fill the courses input first and click on the \u2714 button.`
       );
       setTimeout(() => {
         setErrorMessage("");
       }, 5000);
       return;
     }
-
+  
     const fields = (
       <div className="studentFields">
         {Array.from({ length: numOfStudents }, (_, i) => (
-          <div key={i} className="studentField">
-            <div className="studentLabel">Student {i + 1}</div>
-            <div className="budget-container">
-              <label className="labelBudget">Student's Budget: </label>
-              <input
-                type="number"
-                min="1"
-                className="input-budget"
-                required
-                onChange={(e) => handleBudgetsChange(i + 1, e)}
-              />
-            </div>
-            <div className="num-of-courses-container">
-              <label className="labelCoursesToTake">
-                Number of courses to take:
-              </label>
-              <input
-                type="number"
-                min="1"
-                className="input-courses-to-take"
-                required
-                onChange={(e) => handleNumberOfCoursesToTakeChange(i + 1, e)}
-              />
-            </div>
-
-            <div className="ratingsGroup">
-              <label className="labelRating">Ratings for Courses: </label>
-              {Array.from(
-                { length: Math.ceil(numOfCourses / 3) },
-                (_, rowIndex) => (
-                  <div className="ratingRow" key={rowIndex}>
-                    {Array.from({ length: 3 }, (_, j) => {
-                      const courseIndex = rowIndex * 3 + j;
-                      return courseIndex < numOfCourses ? (
-                        <div key={courseIndex} className="courseRating">
-                          <label className="labelCourseName">
-                            c{courseIndex + 1}:{" "}
-                          </label>
-                          <input
-                            type="number"
-                            min="1"
-                            className="input-course-name"
-                            required
-                            onChange={(e) =>
-                              handleRatingsChange(
-                                i + 1,
-                                courseIndex + 1,
-                                e
-                              )
-                            }
-                          />
-                        </div>
-                      ) : null;
-                    })}
-                  </div>
-                )
-              )}
-            </div>
-          </div>
+          <StudentField
+            key={i}
+            studentIndex={i}
+            numOfCourses={numOfCourses}
+            handleBudgetsChange={handleBudgetsChange}
+            handleNumberOfCoursesToTakeChange={handleNumberOfCoursesToTakeChange}
+            handleRatingsChange={handleRatingsChange}
+          />
         ))}
-        ;
       </div>
     );
+  
     setStudentFields(fields);
   };
+  
+
 
   return (
     <div className="courses-and-students-container">
@@ -190,6 +142,7 @@ export default function CoursesAndStudents({
           min="1"
           required
           className="num-of-courses-input"
+          value={numOfCourses}
           onChange={handleCourseNumberChange}
         />
         <button type="button" onClick={addCourseFields} className="V-Btn">
@@ -215,13 +168,14 @@ export default function CoursesAndStudents({
           required
           className="num-of-students-input"
           disabled={!isCourseDataComplete}
+          value={numOfStudents}
           onChange={handleStudentNumberChange}
         />
         <button type="button" onClick={addStudentFields} className="V-Btn">
           &#10004;
         </button>
       </div>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {isRandom === false && errorMessage && <p className="error-message">{errorMessage}</p>}
 
       <div id="studentFields">
         {/* Fields for students will be added dynamically */}

@@ -29,7 +29,7 @@
   margin: 0;  
 }
 
-.random-container button {
+/* .random-container button {
   border: none;
   color: white;
   font-size: 20px;
@@ -46,7 +46,7 @@
 .random-container button:hover {
   background-color: #3f6a72;
 
-}
+} */
 
 .courses-and-students-container, .aceei-parameters , .tabu-search-parameters{
   display: flex;
@@ -68,6 +68,30 @@
   font-size: 1em;
 }
 
+.run-button, .random-button {
+  border: none;
+    color: white;
+    /*padding: 5px;*/
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    font-family: 'Dancing Script', cursive;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    background: #86b9e8;
+    width: 130px;
+    height: 40px;
+}
 
+.run-button:hover, .random-button:hover{
+  background-color: #3f6a72;
+
+}
+
+
+.run-button {
+  margin-bottom: 50px;
+}
 
 

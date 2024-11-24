@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function AceeiParameters({setEpsilon,setDelate,setEftbStatus}) {
+export default function AceeiParameters({setEpsilon,setDelate,setEftbStatus, epsilon, delta, eftbStatus}) {
   
   const handleEpsilonChange = (e) => {
     setEpsilon(parseFloat(e.target.value) || 0.001)
@@ -25,6 +25,7 @@ export default function AceeiParameters({setEpsilon,setDelate,setEftbStatus}) {
           name="epsilon"
           step="0.001"
           min="0.001"
+          value={epsilon}
           onChange = {handleEpsilonChange}
           required
         />
@@ -38,6 +39,7 @@ export default function AceeiParameters({setEpsilon,setDelate,setEftbStatus}) {
           name="delta"
           step="0.001"
           min="0.001"
+          value={delta}
           onChange={handleDeltaChange}
           required
         />
@@ -48,6 +50,7 @@ export default function AceeiParameters({setEpsilon,setDelate,setEftbStatus}) {
           className="eftb-input"
           id="eftb-selection"
           name="eftb-selection"
+          value={eftbStatus}
           onChange={handleEFTBChange}
           required
         >
