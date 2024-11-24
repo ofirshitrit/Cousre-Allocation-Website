@@ -26,11 +26,7 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
 
   const [isRandom, setIsRandom] = useState(false);
 
-  console.log('====================================');
-  console.log("hello!!!!!!!!!");
-  console.log('====================================');
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -88,6 +84,8 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
               <h2>Try with random example: </h2>
               <button
                 className="random-button"
+                type="button"
+                // TODO: make sure the run working when click on random
                 onClick={() =>
                   handleRandomClick({
                     setNumOfCourses,

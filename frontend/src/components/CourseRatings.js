@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CourseRatings({ studentIndex, numOfCourses,ratings, handleRatingsChange }) {
+export default function CourseRatings({ studentIndex,numOfCourses,ratings, handleRatingsChange }) {
   return (
     <div className="ratingsGroup">
     <label className="labelRating">Ratings for Courses: </label>
@@ -18,7 +18,7 @@ export default function CourseRatings({ studentIndex, numOfCourses,ratings, hand
                 min="1"
                 className="input-course-name"
                 required
-                // value={ratings[studentIndex][courseIndex] || ""}
+                value={ratings[`student${studentIndex+1}`]?.[`course${courseIndex + 1}`] || 0} 
                 onChange={(e) =>
                   handleRatingsChange(studentIndex + 1, courseIndex + 1, e)
                 }
