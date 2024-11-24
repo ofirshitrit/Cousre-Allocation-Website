@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, {useEffect, useState } from "react";
 import "../styles/courses-and-students.css";
 import StudentField from './StudentField'
 import CourseField from "./CourseField";
@@ -13,6 +13,9 @@ export default function CoursesAndStudents({
   setCoursesToTake,
   setRatings,
   coursesCapacities,
+  budgets,
+  coursesToTake,
+  ratings,
   isRandom
 }) {
   const [isCourseDataComplete, setIsCourseDataComplete] = useState(false);
@@ -42,17 +45,14 @@ export default function CoursesAndStudents({
   };
 
   const addCourseFields =  () => {
-    
-    if (numOfCourses > 0) {
+     if (numOfCourses > 0) {
       setIsCourseDataComplete(true);
-      console.log(`courses capacities: ${coursesCapacities}`);
-      
       const fields = (
         <div className="courseFields">
           {Array.from({ length: numOfCourses }, (_, i) => (
             <CourseField 
               key={i}
-              courseIndex = {i+1}
+              courseIndex = {i}
               coursesCapacities = {coursesCapacities}
               handleCousresCapacitiesChange = {handleCousresCapacitiesChange}
             />
@@ -101,6 +101,7 @@ export default function CoursesAndStudents({
   };
 
   const addStudentFields = () => {
+    
     if (isCourseDataComplete === false) {
       setErrorMessage(
         `You have to fill the courses input first and click on the \u2714 button.`
@@ -118,9 +119,13 @@ export default function CoursesAndStudents({
             key={i}
             studentIndex={i}
             numOfCourses={numOfCourses}
+            budgets={budgets}
+            coursesToTake={coursesToTake}
+            ratings={ratings}
             handleBudgetsChange={handleBudgetsChange}
             handleNumberOfCoursesToTakeChange={handleNumberOfCoursesToTakeChange}
             handleRatingsChange={handleRatingsChange}
+            
           />
         ))}
       </div>
@@ -128,6 +133,20 @@ export default function CoursesAndStudents({
   
     setStudentFields(fields);
   };
+  
+
+  useEffect(() => {
+    if (isRandom) {
+      addCourseFields(); 
+    }
+  }, [isRandom]);
+  
+  useEffect(() => {
+    if (isRandom && numOfCourses > 0 && numOfStudents > 0) {
+      setIsCourseDataComplete(true)
+      addStudentFields(); 
+    }
+  }, [courseFields]);
   
 
 
@@ -150,7 +169,6 @@ export default function CoursesAndStudents({
         </button>
       </div>
       <div id="courseFields">
-        {/* Fields for courses will be added dynamically  */}
         {courseFields}
       </div>
       <p>
@@ -175,10 +193,9 @@ export default function CoursesAndStudents({
           &#10004;
         </button>
       </div>
-      {isRandom === false && errorMessage && <p className="error-message">{errorMessage}</p>}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       <div id="studentFields">
-        {/* Fields for students will be added dynamically */}
         {studentFields}
       </div>
     </div>

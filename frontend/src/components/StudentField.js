@@ -1,7 +1,7 @@
 import React from 'react'
 import CourseRatings from './CourseRatings'
 
-export default function StudentField({ studentIndex, numOfCourses, handleBudgetsChange, handleNumberOfCoursesToTakeChange, handleRatingsChange }) {
+export default function StudentField({ studentIndex, numOfCourses,budgets,coursesToTake,ratings, handleBudgetsChange, handleNumberOfCoursesToTakeChange, handleRatingsChange }) {
   return (
     <div className="studentField">
     <div className="studentLabel">Student {studentIndex + 1}</div>
@@ -12,6 +12,7 @@ export default function StudentField({ studentIndex, numOfCourses, handleBudgets
         min="1"
         className="input-budget"
         required
+        value={budgets[studentIndex] || ""}
         onChange={(e) => handleBudgetsChange(studentIndex + 1, e)}
       />
     </div>
@@ -24,12 +25,14 @@ export default function StudentField({ studentIndex, numOfCourses, handleBudgets
         min="1"
         className="input-courses-to-take"
         required
+        value={coursesToTake[studentIndex] || ""}
         onChange={(e) => handleNumberOfCoursesToTakeChange(studentIndex + 1, e)}
       />
     </div>
     <CourseRatings
       studentIndex={studentIndex}
       numOfCourses={numOfCourses}
+      ratings={ratings}
       handleRatingsChange={handleRatingsChange}
     />
   </div>
