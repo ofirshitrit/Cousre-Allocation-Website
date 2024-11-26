@@ -133,20 +133,20 @@ export default function CoursesAndStudents({
   
     setStudentFields(fields);
   };
-  
+    
 
   useEffect(() => {
     if (isRandom) {
-      addCourseFields(); 
+      addCourseFields()
     }
-  }, [isRandom]);
+  }, [numOfCourses, isRandom]);
   
   useEffect(() => {
     if (isRandom && numOfCourses > 0 && numOfStudents > 0) {
       setIsCourseDataComplete(true)
       addStudentFields(); 
     }
-  }, [courseFields]);
+  }, [courseFields, numOfStudents]);
   
 
 
@@ -193,7 +193,7 @@ export default function CoursesAndStudents({
           &#10004;
         </button>
       </div>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {isRandom === false && errorMessage && <p className="error-message">{errorMessage}</p>}
 
       <div id="studentFields">
         {studentFields}

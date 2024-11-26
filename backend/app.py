@@ -27,7 +27,7 @@ def process_form():
     try:
         form_data = request.get_json()
         algoName = form_data['algoName']
-
+        results = ""
         if algoName == "ACEEI":
             results = get_aceei_results(form_data)
         
@@ -35,9 +35,10 @@ def process_form():
             results = get_find_manipulation_results(form_data)
         
         
-        else:
+        elif algoName == "Tabu Searcg":
             results = get_tabu_search_results(form_data)
-
+        else:
+            results = "The Algorithm name is not correct. Try Again."
         print(f"The results of the {algoName} is: ", results)
     except Exception as e:
         print(e)
@@ -57,6 +58,7 @@ def get_aceei_parameters(form_data):
 
 def get_aceei_results(form_data):
     courses_capacities, initial_budgets, agent_capacity, valuations, epsilon,delta,  eftbStatus = get_aceei_parameters(form_data)
+    # print()
     instance = Instance(valuations, agent_capacity, item_capacities=courses_capacities)
     results = divide(find_ACEEI_with_EFTB, instance=instance, initial_budgets=initial_budgets, delta=delta, epsilon=epsilon, t=eftbStatus)
     return results

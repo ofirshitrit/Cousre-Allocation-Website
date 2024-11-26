@@ -1,5 +1,6 @@
-const generateRandomArray = (length, max) =>
-  Array.from({ length }, () => Math.floor(Math.random() * max) + 1);
+// const generateRandomArray = (length, max) =>
+//   Array.from({ length }, () => Math.floor(Math.random() * max) + 1);
+
 
 export const handleRandomClick = ({
   setNumOfCourses,
@@ -23,11 +24,12 @@ export const handleRandomClick = ({
   const randomBudgets = getRandomBudgets(randomNumOfStudents);
   const randomCoursesToTake = getRandomCoursesToTake(randomNumOfStudents);
 
+
   console.log("Courses Capacities:", randomCoursesCapacities);
   console.log("Budgets:", randomBudgets);
   console.log("Courses to Take:", randomCoursesToTake);
 
-  const randomRatings = getRandomRatings(randomNumOfCourses);
+  const randomRatings = getRandomRatings(randomNumOfCourses, randomNumOfCourses);
   console.log("Ratings:", randomRatings);
 
   const [randomEpsilon, randomDelta, randomEftbStatus] =
@@ -67,7 +69,7 @@ const getRandomNumOfStudents = () => {
   return Math.floor(Math.random() * maxNumOfStudents) + 1;
 };
 
-export const getRandomCoursesCapacities = (numOfCourses) => {
+const getRandomCoursesCapacities = (numOfCourses) => {
   return Object.fromEntries(
     Array.from({ length: numOfCourses }, (_, i) => [
       `c${i + 1}`,
@@ -92,14 +94,14 @@ const getRandomCoursesToTake = (numOfStudents) => {
     ])
   );
 };
-const getRandomRatings = (numOfStudents) => {
+const getRandomRatings = (numOfStudents, numOfCourses) => {
   return Object.fromEntries(
     Array.from({ length: numOfStudents }, (_, i) => [
       `s${i + 1}`,
       Object.fromEntries(
-        Array.from({ length: numOfStudents }, (_, j) => [
+        Array.from({ length: numOfCourses }, (_, j) => [
           `c${j + 1}`,
-          Math.floor(Math.random() * maxRating),
+          Math.floor(Math.random() * maxRating) + 1 ,
         ])
       ),
     ])

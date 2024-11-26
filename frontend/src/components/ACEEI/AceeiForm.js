@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Header from "../Header";
 import "../../styles/forms.css";
 import CoursesAndStudents from "../CoursesAndStudents";
 import Results from "../Results";
 import AceeiParameters from "./AceeiParameters";
-import {handleRandomClick, getRandomCoursesCapacities} from "../utils";
+import {handleRandomClick} from "../utils";
 
 // TODO: fix the GUI
 
