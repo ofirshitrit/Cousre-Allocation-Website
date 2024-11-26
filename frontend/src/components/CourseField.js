@@ -10,7 +10,7 @@ export default function CourseField({ courseIndex, coursesCapacities,  handleCou
         name={`c${courseIndex + 1} Capacity`}
         className="capacity-input"
         required
-        value={coursesCapacities[courseIndex] || ""}
+        value={coursesCapacities[`c${courseIndex +1}`] || ""}
         onChange={(e) => handleCousresCapacitiesChange(courseIndex, e)}
       />
     </div>

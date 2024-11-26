@@ -4,7 +4,7 @@ import "../../styles/forms.css";
 import CoursesAndStudents from "../CoursesAndStudents";
 import Results from "../Results";
 import AceeiParameters from "./AceeiParameters";
-import handleRandomClick from "../utils";
+import {handleRandomClick, getRandomCoursesCapacities} from "../utils";
 
 // TODO: fix the GUI
 
@@ -64,10 +64,6 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
     }
   };
 
-  useEffect(()=>{
-
-    
-  }, [numOfCourses, numOfStudents])
   return (
     <>
       {displayResults === false && (

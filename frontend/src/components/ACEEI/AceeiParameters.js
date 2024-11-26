@@ -30,7 +30,7 @@ export default function AceeiParameters({setEpsilon,setDelate,setEftbStatus, eps
           required
         />
       </div>
-      <div class="fields-container">
+      <div className="fields-container">
         <label htmlFor="delta">Delta (δ):</label>
         <input
           className="delta-input"

@@ -18,7 +18,7 @@ export default function CourseRatings({ studentIndex,numOfCourses,ratings, handl
                 min="1"
                 className="input-course-name"
                 required
-                value={ratings[`student${studentIndex+1}`]?.[`course${courseIndex + 1}`] || 0} 
+                value={ratings[`s${studentIndex+1}`]?.[`c${courseIndex + 1}`] || ""} 
                 onChange={(e) =>
                   handleRatingsChange(studentIndex + 1, courseIndex + 1, e)
                 }

@@ -12,7 +12,7 @@ export default function StudentField({ studentIndex, numOfCourses,budgets,course
         min="1"
         className="input-budget"
         required
-        value={budgets[studentIndex] || ""}
+        value={budgets[`s${studentIndex + 1}`] || ""}
         onChange={(e) => handleBudgetsChange(studentIndex + 1, e)}
       />
     </div>
@@ -25,7 +25,7 @@ export default function StudentField({ studentIndex, numOfCourses,budgets,course
         min="1"
         className="input-courses-to-take"
         required
-        value={coursesToTake[studentIndex] || ""}
+        value={coursesToTake[`s${studentIndex + 1}`] || ""}
         onChange={(e) => handleNumberOfCoursesToTakeChange(studentIndex + 1, e)}
       />
     </div>
