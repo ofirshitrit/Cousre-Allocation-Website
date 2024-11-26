@@ -86,7 +86,6 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
               <button
                 className="random-button"
                 type="button"
-                // TODO: make sure the run working when click on random
                 onClick={() =>
                   handleRandomClick({
                     setNumOfCourses,

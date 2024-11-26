@@ -29,7 +29,7 @@ export const handleRandomClick = ({
   console.log("Budgets:", randomBudgets);
   console.log("Courses to Take:", randomCoursesToTake);
 
-  const randomRatings = getRandomRatings(randomNumOfCourses, randomNumOfCourses);
+  const randomRatings = getRandomRatings(randomNumOfStudents, randomNumOfCourses);
   console.log("Ratings:", randomRatings);
 
   const [randomEpsilon, randomDelta, randomEftbStatus] =

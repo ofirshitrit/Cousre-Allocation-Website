@@ -58,7 +58,13 @@ def get_aceei_parameters(form_data):
 
 def get_aceei_results(form_data):
     courses_capacities, initial_budgets, agent_capacity, valuations, epsilon,delta,  eftbStatus = get_aceei_parameters(form_data)
-    # print()
+    print("Courses Capacities:", courses_capacities)
+    print("Initial Budgets:", initial_budgets)
+    print("Agent Capacity:", agent_capacity)
+    print("Valuations:", valuations)
+    print("Epsilon:", epsilon)
+    print("Delta:", delta)
+    print("EFTB Status:", eftbStatus)
     instance = Instance(valuations, agent_capacity, item_capacities=courses_capacities)
     results = divide(find_ACEEI_with_EFTB, instance=instance, initial_budgets=initial_budgets, delta=delta, epsilon=epsilon, t=eftbStatus)
     return results
