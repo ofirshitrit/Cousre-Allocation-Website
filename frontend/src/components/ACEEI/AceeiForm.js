@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Header";
 import "../../styles/forms.css";
 import CoursesAndStudents from "../CoursesAndStudents";
@@ -26,7 +26,7 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
 
   const [isRandom, setIsRandom] = useState(false);
 
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -63,6 +63,11 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
       console.error("Error submitting form:", error);
     }
   };
+
+  useEffect(()=>{
+
+    
+  }, [numOfCourses, numOfStudents])
   return (
     <>
       {displayResults === false && (
