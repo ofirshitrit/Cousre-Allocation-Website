@@ -1,13 +1,13 @@
 import React from "react";
 
-export default function AceeiParameters({setEpsilon,setDelate,setEftbStatus, epsilon, delta, eftbStatus}) {
+export default function AceeiParameters({setEpsilon,setDelta,setEftbStatus, epsilon, delta, eftbStatus}) {
   
   const handleEpsilonChange = (e) => {
     setEpsilon(parseFloat(e.target.value) || 0.001)
   }
 
   const handleDeltaChange = (e) => {
-    setDelate(parseFloat(e.target.value) || 0.001)
+    setDelta(parseFloat(e.target.value) || 0.001)
   }
 
   const handleEFTBChange = (e) => {

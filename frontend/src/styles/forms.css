@@ -30,7 +30,7 @@
 }
 
 
-.courses-and-students-container, .aceei-parameters , .tabu-search-parameters{
+.courses-and-students-container, .aceei-parameters , .tabu-search-parameters, .findmanipulation-parameters, .choosen-student-container{
   display: flex;
   align-items: center;  
   flex-direction: column; 

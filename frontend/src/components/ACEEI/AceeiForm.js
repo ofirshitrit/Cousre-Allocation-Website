@@ -20,7 +20,7 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
   const [ratings, setRatings] = useState({});
 
   const [epsilon, setEpsilon] = useState(0);
-  const [delta, setDelate] = useState(0);
+  const [delta, setDelta] = useState(0);
   const [eftbStatus, setEftbStatus] = useState("no-eftb");
 
   const [isRandom, setIsRandom] = useState(false);
@@ -63,7 +63,7 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
                 setCoursesToTake,
                 setRatings,
                 setEpsilon,
-                setDelate,
+                setDelta,
                 setEftbStatus,
                 setIsRandom,
               }}
@@ -87,7 +87,7 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
 
             <AceeiParameters
               setEpsilon={setEpsilon}
-              setDelate={setDelate}
+              setDelta={setDelta}
               setEftbStatus={setEftbStatus}
               epsilon={epsilon}
               delta={delta}

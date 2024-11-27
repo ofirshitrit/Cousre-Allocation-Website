@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import Header from "../Header";
 import CoursesAndStudents from "../CoursesAndStudents";
 import Results from "../Results";
+import AceeiParameters from "../ACEEI/AceeiParameters";
+import RandomPart from "../RandomPart";
+import { handleSubmit } from "../utils";
+import FindManipulationParameters from "./FindManipulationParameters";
 
 // TODO: add all the FindManipulationForm parameters
 // TODO: fix the GUI
@@ -17,43 +21,36 @@ export default function FindManipulationForm({ setSelectedAlgorithm }) {
   const [coursesToTake, setCoursesToTake] = useState({});
   const [ratings, setRatings] = useState({});
 
-  const handleSubmit = async (e) => {
-    console.log("in handleSubmit");
+  const [epsilon, setEpsilon] = useState(0);
+  const [delta, setDelta] = useState(0);
+  const [eftbStatus, setEftbStatus] = useState("no-eftb");
+  const [choosenStudent, setChoosenStudent] = useState("");
+  const [eta, setEta] = useState(1);
+  const [beta, setBeta] = useState(1);
+  const [cretiriaForManipulation, setCretiriaForManipulation] = useState("");
 
-    e.preventDefault();
+  const [isRandom, setIsRandom] = useState(false);
 
-    const formData = {
-      numOfCourses,
-      coursesCapacities,
-      numOfStudents,
-      budgets,
-      coursesToTake,
-      ratings,
-    };
-
-    const data = Object.fromEntries(Object.entries(formData));
-
-    try {
-      // Send data to Flask backend
-      const response = await fetch("http://127.0.0.1:5000/process", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        const jsonResponse = await response.json();
-        setResults(jsonResponse.answer);
-        setDisplayResults(true);
-      } else {
-        console.error("Failed to submit form.");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
+  const algoName = "Find Fanipulation";
+  let formData = {
+    coursesCapacities,
+    budgets,
+    coursesToTake,
+    ratings,
+    epsilon,
+    eftbStatus,
+    algoName,
+    delta,
+    choosenStudent,
+    eta,
+    beta,
+    cretiriaForManipulation,
   };
+
+  const handleChoosenStudentChange = (e) => {
+    setChoosenStudent(e.target.value);
+  };
+
   return (
     <>
       {displayResults === false && (
@@ -64,18 +61,31 @@ export default function FindManipulationForm({ setSelectedAlgorithm }) {
             inHomePage={false}
           />
           <form
-            onSubmit={handleSubmit}
+            onSubmit={(e) =>
+              handleSubmit(e, formData, setResults, setDisplayResults)
+            }
             id="findManipulationForm"
             className="form-container"
           >
-            <h2>
-              Insert the parameters and run the algorithm <br /> Or <br />
-            </h2>
-            <div className="random-container">
-              <h2>Try with random example: </h2>
-              <button>Random</button>
-            </div>
-            <input type="submit" value="Run" />
+            <RandomPart
+              parameters={{
+                algoName,
+                setNumOfCourses,
+                setCoursesCapacities,
+                setNumOfStudents,
+                setBudgets,
+                setCoursesToTake,
+                setRatings,
+                setEpsilon,
+                setEftbStatus,
+                setDelta,
+                setChoosenStudent,
+                setEta,
+                setBeta,
+                setCretiriaForManipulation,
+                setIsRandom,
+              }}
+            />
 
             <CoursesAndStudents
               numOfCourses={numOfCourses}
@@ -86,8 +96,50 @@ export default function FindManipulationForm({ setSelectedAlgorithm }) {
               setBudgets={setBudgets}
               setCoursesToTake={setCoursesToTake}
               setRatings={setRatings}
+              coursesCapacities={coursesCapacities}
+              budgets={budgets}
+              coursesToTake={coursesToTake}
+              ratings={ratings}
+              isRandom={isRandom}
             />
-            
+
+            <div className="choosen-student-container">
+              <div className="fields-container">
+                <label htmlFor="student-selection">Choose Student:</label>
+                <select
+                  className="student-input"
+                  id="student-selection"
+                  name="student-selection"
+                  value={choosenStudent}
+                  onChange={handleChoosenStudentChange}
+                  required
+                >
+                  {Array.from({ length: numOfStudents }, (_, i) => (
+                    <option value={`s${i + 1}`}>{`Student ${i + 1}`}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <AceeiParameters
+              setEpsilon={setEpsilon}
+              setDelta={setDelta}
+              setEftbStatus={setEftbStatus}
+              epsilon={epsilon}
+              delta={delta}
+              eftbStatus={eftbStatus}
+            />
+
+            <FindManipulationParameters
+              eta={eta}
+              setEta={setEta}
+              beta={beta}
+              setBeta={setBeta}
+              cretiriaForManipulation={cretiriaForManipulation}
+              setCretiriaForManipulation={setCretiriaForManipulation}
+            />
+
+            <input className="run-button" type="submit" value="Run" />
           </form>
         </>
       )}
