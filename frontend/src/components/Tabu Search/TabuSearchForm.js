@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Header from "../Header";
-import '../../styles/forms.css'
+import "../../styles/forms.css";
 import CoursesAndStudents from "../CoursesAndStudents";
 import Results from "../Results";
 import TabuSearchParameters from "./TabuSearchParameters";
+import RandomPart from "../RandomPart";
+import { handleSubmit } from "../utils";
 
 // TODO: fix the GUI
 export default function TabuSearchForm({ setSelectedAlgorithm }) {
@@ -19,45 +21,19 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
   const [ratings, setRatings] = useState({});
 
   const [beta, setBeta] = useState(1);
-  const [deltas, setDeltas] = useState([])
+  const [deltas, setDeltas] = useState([]);
 
-  const handleSubmit = async (e) => {
-    console.log("in handleSubmit");
+  const [isRandom, setIsRandom] = useState(false);
 
-    e.preventDefault();
-
-    const formData = {
-      coursesCapacities,
-      budgets,
-      coursesToTake,
-      ratings,
-      beta,
-      deltas,
-      "algoName": "Tabu Search"
-    };
-
-    const data = Object.fromEntries(Object.entries(formData));
-
-    try {
-      // Send data to Flask backend
-      const response = await fetch("http://127.0.0.1:5000/process", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        const jsonResponse = await response.json();
-        setResults(jsonResponse.results);
-        setDisplayResults(true);
-      } else {
-        console.error("Failed to submit form.");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
+  const algoName = "Tabu Search";
+  let formData = {
+    coursesCapacities,
+    budgets,
+    coursesToTake,
+    ratings,
+    beta,
+    deltas,
+    algoName,
   };
 
   return (
@@ -70,18 +46,26 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
             inHomePage={false}
           />
           <form
-            onSubmit={handleSubmit}
+            onSubmit={(e) =>
+              handleSubmit(e, formData, setResults, setDisplayResults)
+            }
             id="tabuSearchForm"
             className="form-container"
           >
-            <h2>
-              Insert the parameters and run the algorithm <br /> Or <br />
-            </h2>
-            <div className="random-container">
-              <h2>Try with random example: </h2>
-              <button>Random</button>
-            </div>
-            <input type="submit" value="Run" />
+            <RandomPart
+              parameters={{
+                algoName,
+                setNumOfCourses,
+                setCoursesCapacities,
+                setNumOfStudents,
+                setBudgets,
+                setCoursesToTake,
+                setRatings,
+                setBeta,
+                setDeltas,
+                setIsRandom,
+              }}
+            />
 
             <CoursesAndStudents
               numOfCourses={numOfCourses}
@@ -92,9 +76,21 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
               setBudgets={setBudgets}
               setCoursesToTake={setCoursesToTake}
               setRatings={setRatings}
+              coursesCapacities={coursesCapacities}
+              budgets={budgets}
+              coursesToTake={coursesToTake}
+              ratings={ratings}
+              isRandom={isRandom}
             />
 
-            <TabuSearchParameters setBeta={setBeta} deltas={deltas} setDeltas={setDeltas} />
+            <TabuSearchParameters
+              setBeta={setBeta}
+              deltas={deltas}
+              setDeltas={setDeltas}
+              beta={beta}
+            />
+
+            <input className="run-button" type="submit" value="Run" />
           </form>
         </>
       )}

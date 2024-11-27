@@ -1,40 +1,42 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-export default function TabuSearchParameters({setBeta, deltas, setDeltas}) {
+export default function TabuSearchParameters({
+  setBeta,
+  deltas,
+  setDeltas,
+  beta,
+}) {
   const [deltaInputs, setDeltaInputs] = useState([]);
 
-
   const handleBetaChange = (e) => {
-    setBeta(parseInt(e.target.value) || 0)
-    
-  }
+    setBeta(parseInt(e.target.value) || 0);
+  };
 
   const handleDeltaChange = (e, index) => {
-  const newDelta = parseFloat(e.target.value) || 0;
-  const updatedDeltas = [...deltas];
-  updatedDeltas[index] = newDelta;
-  setDeltas(updatedDeltas);
-  }
- 
+    const newDelta = parseFloat(e.target.value) || 0;
+    const updatedDeltas = [...deltas];
+    updatedDeltas[index] = newDelta;
+    setDeltas(updatedDeltas);
+  };
+
   const addDelta = () => {
     setDeltaInputs([...deltaInputs, deltaInputs.length]);
     setDeltas([...deltas, 0]);
-    console.log('Current deltas:', deltas);
-
-    
-  }
+    console.log("Current deltas:", deltas);
+  };
 
   const removeDelta = (indexToRemove) => {
-    const filteredInputs = deltaInputs.filter(index => index !== indexToRemove);
+    const filteredInputs = deltaInputs.filter(
+      (index) => index !== indexToRemove
+    );
     const updatedDeltas = deltas.filter((_, index) => index !== indexToRemove);
-    
+
     setDeltaInputs(filteredInputs);
     setDeltas(updatedDeltas);
-  }
- 
+  };
 
   return (
-    <div className='tabu-search-parameters'>
+    <div className="tabu-search-parameters">
       <div className="fields-container">
         <label htmlFor="beta">Beta (β):</label>
         <input
@@ -44,33 +46,47 @@ export default function TabuSearchParameters({setBeta, deltas, setDeltas}) {
           name="beta"
           step="1"
           min="1"
-          onChange = {handleBetaChange}
+          value={beta}
+          onChange={handleBetaChange}
           required
         />
       </div>
 
       <div className="fields-container">
         <label htmlFor="delta">Delta (δ):</label>
-        <input className='delta-input' type="number" id="delta" name="delta" step="0.001" min="0.001" onChange={handleDeltaChange} required />
-        <button type="button" onClick={addDelta} className="addDeltaBtn">Add Delta</button>
+        <input
+          className="delta-input"
+          type="number"
+          id="delta"
+          name="delta"
+          step="0.001"
+          min="0.001"
+          value={deltas[0] || ""}
+          onChange={handleDeltaChange}
+          required
+        />
+        <button type="button" onClick={addDelta} className="addDeltaBtn">
+          Add Delta
+        </button>
       </div>
-      
+
       {deltaInputs.map((_, index) => (
         <div key={index} className="fields-container">
           <label htmlFor={`delta-${index + 1}`}>Delta (δ):</label>
-          <input 
-            className='delta-input' 
-            type="number" 
-            id={`delta-${index + 1}`} 
-            name={`delta-${index + 1}`} 
-            step="0.001" 
-            min="0.001" 
-            onChange={(e) => handleDeltaChange(e, index + 1)} 
-            required 
+          <input
+            className="delta-input"
+            type="number"
+            id={`delta-${index + 1}`}
+            name={`delta-${index + 1}`}
+            step="0.001"
+            min="0.001"
+            value={deltas[index] || 0}
+            onChange={(e) => handleDeltaChange(e, index + 1)}
+            required
           />
-          <button 
-            type="button" 
-            onClick={() => removeDelta(index)} 
+          <button
+            type="button"
+            onClick={() => removeDelta(index)}
             className="removeDeltaBtn"
           >
             Remove
@@ -78,5 +94,5 @@ export default function TabuSearchParameters({setBeta, deltas, setDeltas}) {
         </div>
       ))}
     </div>
-  )
+  );
 }

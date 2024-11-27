@@ -4,9 +4,8 @@ import "../../styles/forms.css";
 import CoursesAndStudents from "../CoursesAndStudents";
 import Results from "../Results";
 import AceeiParameters from "./AceeiParameters";
-import {handleRandomClick} from "../utils";
-
-// TODO: fix the GUI
+import RandomPart from "../RandomPart";
+import { handleSubmit } from "../utils";
 
 export default function AceeiForm({ setSelectedAlgorithm }) {
   const [results, setResults] = useState(null);
@@ -26,42 +25,16 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
 
   const [isRandom, setIsRandom] = useState(false);
 
-  
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = {
-      coursesCapacities,
-      budgets,
-      coursesToTake,
-      ratings,
-      epsilon,
-      delta,
-      eftbStatus,
-      algoName: "ACEEI",
-    };
-
-    const data = Object.fromEntries(Object.entries(formData));
-
-    try {
-      const response = await fetch("http://127.0.0.1:5000/process", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        const jsonResponse = await response.json();
-        setResults(jsonResponse.results);
-        setDisplayResults(true);
-      } else {
-        console.error("Failed to submit form.");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
+  const algoName = "ACEEI";
+  let formData = {
+    coursesCapacities,
+    budgets,
+    coursesToTake,
+    ratings,
+    epsilon,
+    delta,
+    eftbStatus,
+    algoName,
   };
 
   return (
@@ -74,36 +47,27 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
             inHomePage={false}
           />
           <form
-            onSubmit={handleSubmit}
+            onSubmit={(e) =>
+              handleSubmit(e, formData, setResults, setDisplayResults)
+            }
             id="aceeiForm"
             className="form-container"
           >
-            <h2>
-              Insert the parameters and run the algorithm <br /> Or <br />
-            </h2>
-            <div className="random-container">
-              <h2>Try with random example: </h2>
-              <button
-                className="random-button"
-                type="button"
-                onClick={() =>
-                  handleRandomClick({
-                    setNumOfCourses,
-                    setCoursesCapacities,
-                    setNumOfStudents,
-                    setBudgets,
-                    setCoursesToTake,
-                    setRatings,
-                    setEpsilon,
-                    setDelate,
-                    setEftbStatus,
-                    setIsRandom,
-                  })
-                }
-              >
-                Random
-              </button>
-            </div>
+            <RandomPart
+              parameters={{
+                algoName,
+                setNumOfCourses,
+                setCoursesCapacities,
+                setNumOfStudents,
+                setBudgets,
+                setCoursesToTake,
+                setRatings,
+                setEpsilon,
+                setDelate,
+                setEftbStatus,
+                setIsRandom,
+              }}
+            />
 
             <CoursesAndStudents
               numOfCourses={numOfCourses}

@@ -11,6 +11,7 @@
   width: 40px;
   height: 30px;
   background: #86b9e8;
+  transition: background 0.1s ease-in-out, transform 0.2s ease-in-out;
   border: none;
   border-radius: 3px;
   color: #fff;

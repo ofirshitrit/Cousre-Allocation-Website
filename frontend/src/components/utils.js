@@ -1,8 +1,5 @@
-// const generateRandomArray = (length, max) =>
-//   Array.from({ length }, () => Math.floor(Math.random() * max) + 1);
 
-
-export const handleRandomClick = ({
+export const handleRandomAceei = ({
   setNumOfCourses,
   setCoursesCapacities,
   setNumOfStudents,
@@ -14,6 +11,51 @@ export const handleRandomClick = ({
   setEftbStatus,
   setIsRandom,
 }) => {
+  const randomNumOfCourses = getRandomNumOfCourses();
+  const randomNumOfStudents = getRandomNumOfStudents();
+
+  const randomCoursesCapacities = getRandomCoursesCapacities(randomNumOfCourses);
+  const randomBudgets = getRandomBudgets(randomNumOfStudents);
+  const randomCoursesToTake = getRandomCoursesToTake(randomNumOfStudents);
+
+  const randomRatings = getRandomRatings(randomNumOfStudents, randomNumOfCourses);
+
+  const [randomEpsilon, randomDelta, randomEftbStatus] =
+    getRandomAceeiParemeters();
+
+
+  setNumOfCourses(randomNumOfCourses);
+  setCoursesCapacities(randomCoursesCapacities);
+  setNumOfStudents(randomNumOfStudents);
+  setBudgets(randomBudgets);
+  setCoursesToTake(randomCoursesToTake);
+  setRatings(randomRatings);
+  setEpsilon(randomEpsilon);
+  setDelate(randomDelta);
+  setEftbStatus(randomEftbStatus);
+
+  setIsRandom(true);
+};
+
+
+export const handleRandomFindManipulation = () =>{
+  console.log('====================================');
+  console.log("handleRandomFindManipulation");
+  console.log('====================================');
+
+}
+
+export const handleRandomTabuSearch = ({setNumOfCourses,
+  setCoursesCapacities,
+  setNumOfStudents,
+  setBudgets,
+  setCoursesToTake,
+  setRatings,
+  setBeta,
+  setDeltas,
+  setIsRandom,
+}) =>{
+
   const randomNumOfCourses = getRandomNumOfCourses();
   const randomNumOfStudents = getRandomNumOfStudents();
 
@@ -32,24 +74,53 @@ export const handleRandomClick = ({
   const randomRatings = getRandomRatings(randomNumOfStudents, randomNumOfCourses);
   console.log("Ratings:", randomRatings);
 
-  const [randomEpsilon, randomDelta, randomEftbStatus] =
-    getRandomAceeiParemeters();
+  const [randomBeta, randomDeltas] = getRandomTabuSeachParameters()
+  console.log("Beta:", randomBeta);
+  console.log("Deltas:", randomDeltas);
 
-  console.log("random Epsilon:", randomEpsilon);
-  console.log("random Delta:", randomDelta);
-  console.log("randomEftbStatus:", randomEftbStatus);
-
+  
   setNumOfCourses(randomNumOfCourses);
   setCoursesCapacities(randomCoursesCapacities);
   setNumOfStudents(randomNumOfStudents);
   setBudgets(randomBudgets);
   setCoursesToTake(randomCoursesToTake);
   setRatings(randomRatings);
-  setEpsilon(randomEpsilon);
-  setDelate(randomDelta);
-  setEftbStatus(randomEftbStatus);
+  setBeta(randomBeta);
+  setDeltas(randomDeltas);
 
   setIsRandom(true);
+
+}
+
+
+
+export const handleSubmit = async (e, formData, setResults, setDisplayResults) => {
+  console.log("in handleSubmit");
+
+  e.preventDefault();
+
+  const data = Object.fromEntries(Object.entries(formData));
+
+  try {
+    // Send data to Flask backend
+    const response = await fetch("http://127.0.0.1:5000/process", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      const jsonResponse = await response.json();
+      setResults(jsonResponse.results);
+      setDisplayResults(true);
+    } else {
+      console.error("Failed to submit form.");
+    }
+  } catch (error) {
+    console.error("Error submitting form:", error);
+  }
 };
 
 const maxNumOfCourses = 11;
@@ -60,6 +131,7 @@ const maxNumCoursesToTake = 5;
 const maxRating = 31;
 const maxEpsilon = 0.1;
 const maxDelta = 0.5;
+const maxBeta = 16;
 
 const getRandomNumOfCourses = () => {
   return Math.floor(Math.random() * maxNumOfCourses) + 1;
@@ -120,3 +192,16 @@ const getRandomAceeiParemeters = () => {
 
   return [randomEpsilon, randomDelta, randomEftbStatus];
 };
+
+
+const getRandomTabuSeachParameters = () => {
+  const randomBeta = Math.floor(Math.random() * maxBeta) + 1;
+  const numOfDelats = Math.floor(Math.random() * 3) + 1
+  const randomDeltas = []
+  for (let i = 0; i < numOfDelats; i++) {
+    const delta = (Math.random() * maxDelta) + 0.1; 
+    randomDeltas.push(delta);
+  }
+
+  return [randomBeta, randomDeltas]
+}
