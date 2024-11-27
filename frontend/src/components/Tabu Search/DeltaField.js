@@ -1,18 +1,38 @@
 import React from "react";
 
-export default function DeltaField({ courseIndex, coursesCapacities,  handleCousresCapacitiesChange }) {
+export default function DeltaField({ deltas, handleDeltaChange, index, setDeltas, deltaComponents, setDeltaComponents }) {
+
+  const removeDelta = (indexToRemove) => {
+    const filteredDeltas = deltaComponents.filter(
+      (index) => index !== indexToRemove
+    );
+    const updatedDeltas = deltas.filter((_, index) => index !== indexToRemove);
+    setDeltaComponents(filteredDeltas)
+    setDeltas(updatedDeltas);
+  };
+
   return (
-    <div className="deltaField">
-      <label className="capacityLabel">Course {courseIndex + 1} Capacity: </label>
+    <div className="fields-container">
+      <label htmlFor={`delta-${index + 1}`}>Delta (δ):</label>
       <input
+        className="delta-input"
         type="number"
-        min="1"
-        name={`c${courseIndex + 1} Capacity`}
-        className="capacity-input"
+        id={`delta-${index + 1}`}
+        name={`delta-${index + 1}`}
+        step="0.001"
+        min="0.001"
+        // value={deltas[index] || 0}
+        onChange={(e) => handleDeltaChange(e, index + 1)}
         required
-        value={coursesCapacities[`c${courseIndex +1}`] || ""}
-        onChange={(e) => handleCousresCapacitiesChange(courseIndex, e)}
       />
+
+      <button
+        type="button"
+        onClick={() => removeDelta(index)}
+        className="removeDeltaBtn"
+      >
+        Remove
+      </button>
     </div>
   );
 }

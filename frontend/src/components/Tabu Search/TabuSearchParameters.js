@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import DeltaField from "./DeltaField";
 
 export default function TabuSearchParameters({
   setBeta,
@@ -6,12 +7,15 @@ export default function TabuSearchParameters({
   setDeltas,
   beta,
 }) {
-  const [deltaInputs, setDeltaInputs] = useState([]);
+
+
+  const [deltaComponents, setDeltaComponents] = useState([]);
 
   const handleBetaChange = (e) => {
     setBeta(parseInt(e.target.value) || 0);
   };
 
+    
   const handleDeltaChange = (e, index) => {
     const newDelta = parseFloat(e.target.value) || 0;
     const updatedDeltas = [...deltas];
@@ -19,20 +23,21 @@ export default function TabuSearchParameters({
     setDeltas(updatedDeltas);
   };
 
+
   const addDelta = () => {
-    setDeltaInputs([...deltaInputs, deltaInputs.length]);
-    setDeltas([...deltas, 0]);
-    console.log("Current deltas:", deltas);
-  };
-
-  const removeDelta = (indexToRemove) => {
-    const filteredInputs = deltaInputs.filter(
-      (index) => index !== indexToRemove
-    );
-    const updatedDeltas = deltas.filter((_, index) => index !== indexToRemove);
-
-    setDeltaInputs(filteredInputs);
-    setDeltas(updatedDeltas);
+    setDeltaComponents((prev) => [
+      ...prev,
+      <DeltaField
+        key={prev.length}
+        id={prev.length + 1}
+        deltas={deltas}
+        handleDeltaChange={handleDeltaChange}
+        index={prev.length}
+        setDeltas={setDeltas}
+        deltaComponents={deltaComponents}
+        setDeltaComponents={setDeltaComponents}
+      />,
+    ]);
   };
 
   return (
@@ -61,38 +66,18 @@ export default function TabuSearchParameters({
           name="delta"
           step="0.001"
           min="0.001"
-          value={deltas[0] || ""}
-          onChange={handleDeltaChange}
+          onChange={(e) => {
+            handleDeltaChange(e, 0);
+          }}
           required
         />
-        <button type="button" onClick={addDelta} className="addDeltaBtn">
+        <button type="button" onClick={addDelta} className="add-delta-button">
           Add Delta
         </button>
       </div>
 
-      {deltaInputs.map((_, index) => (
-        <div key={index} className="fields-container">
-          <label htmlFor={`delta-${index + 1}`}>Delta (δ):</label>
-          <input
-            className="delta-input"
-            type="number"
-            id={`delta-${index + 1}`}
-            name={`delta-${index + 1}`}
-            step="0.001"
-            min="0.001"
-            value={deltas[index] || 0}
-            onChange={(e) => handleDeltaChange(e, index + 1)}
-            required
-          />
-          <button
-            type="button"
-            onClick={() => removeDelta(index)}
-            className="removeDeltaBtn"
-          >
-            Remove
-          </button>
-        </div>
-      ))}
+
+      {deltaComponents.map((deltaComponent) => deltaComponent)}
     </div>
   );
 }

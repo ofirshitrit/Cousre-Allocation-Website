@@ -20,7 +20,7 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
   const [coursesToTake, setCoursesToTake] = useState({});
   const [ratings, setRatings] = useState({});
 
-  const [beta, setBeta] = useState(1);
+  const [beta, setBeta] = useState(0);
   const [deltas, setDeltas] = useState([]);
 
   const [isRandom, setIsRandom] = useState(false);
