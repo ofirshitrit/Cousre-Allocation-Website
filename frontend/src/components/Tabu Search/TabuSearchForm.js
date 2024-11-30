@@ -23,6 +23,7 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
   const [beta, setBeta] = useState(0);
   const [deltas, setDeltas] = useState([]);
 
+
   const [isRandom, setIsRandom] = useState(false);
 
   const algoName = "Tabu Search";

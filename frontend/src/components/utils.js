@@ -1,3 +1,4 @@
+import DeltaField from "./Tabu Search/DeltaField";
 
 export const handleRandomAceei = ({
   setNumOfCourses,
@@ -7,22 +8,25 @@ export const handleRandomAceei = ({
   setCoursesToTake,
   setRatings,
   setEpsilon,
-  setDelate,
+  setDelta,
   setEftbStatus,
   setIsRandom,
 }) => {
   const randomNumOfCourses = getRandomNumOfCourses();
   const randomNumOfStudents = getRandomNumOfStudents();
 
-  const randomCoursesCapacities = getRandomCoursesCapacities(randomNumOfCourses);
+  const randomCoursesCapacities =
+    getRandomCoursesCapacities(randomNumOfCourses);
   const randomBudgets = getRandomBudgets(randomNumOfStudents);
   const randomCoursesToTake = getRandomCoursesToTake(randomNumOfStudents);
 
-  const randomRatings = getRandomRatings(randomNumOfStudents, randomNumOfCourses);
+  const randomRatings = getRandomRatings(
+    randomNumOfStudents,
+    randomNumOfCourses
+  );
 
   const [randomEpsilon, randomDelta, randomEftbStatus] =
     getRandomAceeiParemeters();
-
 
   setNumOfCourses(randomNumOfCourses);
   setCoursesCapacities(randomCoursesCapacities);
@@ -31,21 +35,73 @@ export const handleRandomAceei = ({
   setCoursesToTake(randomCoursesToTake);
   setRatings(randomRatings);
   setEpsilon(randomEpsilon);
-  setDelate(randomDelta);
+  setDelta(randomDelta);
   setEftbStatus(randomEftbStatus);
 
   setIsRandom(true);
 };
 
+export const handleRandomFindManipulation = ({
+  setNumOfCourses,
+  setCoursesCapacities,
+  setNumOfStudents,
+  setBudgets,
+  setCoursesToTake,
+  setRatings,
+  setEpsilon,
+  setDelta,
+  setEftbStatus,
+  setEta,
+  setBeta,
+  setChoosenStudent,
+  setCretiriaForManipulation,
+  setIsRandom,
+}) => {
+  const randomNumOfCourses = getRandomNumOfCourses();
+  const randomNumOfStudents = getRandomNumOfStudents();
 
-export const handleRandomFindManipulation = () =>{
+  const randomCoursesCapacities =
+    getRandomCoursesCapacities(randomNumOfCourses);
+  const randomBudgets = getRandomBudgets(randomNumOfStudents);
+  const randomCoursesToTake = getRandomCoursesToTake(randomNumOfStudents);
+
+  const randomRatings = getRandomRatings(
+    randomNumOfStudents,
+    randomNumOfCourses
+  );
+
+  const [randomEpsilon, randomDelta, randomEftbStatus] =
+    getRandomAceeiParemeters();
+
+  const [randomEta, randomBeta, randomChoosenStudent, randomCretiria] =
+    getRandomFindManipulationParameters(randomNumOfStudents);
+
   console.log('====================================');
-  console.log("handleRandomFindManipulation");
+  console.log("randomEta", randomEta);
+  console.log("randomBeta", randomBeta);
+  console.log("randomChoosenStudent", randomChoosenStudent);
+  console.log("randomCretiria", randomCretiria);
   console.log('====================================');
 
-}
+  setNumOfCourses(randomNumOfCourses);
+  setCoursesCapacities(randomCoursesCapacities);
+  setNumOfStudents(randomNumOfStudents);
+  setBudgets(randomBudgets);
+  setCoursesToTake(randomCoursesToTake);
+  setRatings(randomRatings);
+  setEpsilon(randomEpsilon);
+  setDelta(randomDelta);
+  setEftbStatus(randomEftbStatus);
+  setEta(randomEta);
+  setBeta(randomBeta);
+  setChoosenStudent(randomChoosenStudent);
+  setCretiriaForManipulation(randomCretiria);
 
-export const handleRandomTabuSearch = ({setNumOfCourses,
+  setIsRandom(true);
+};
+
+export const handleRandomTabuSearch = ({
+  setNumOfCourses,
   setCoursesCapacities,
   setNumOfStudents,
   setBudgets,
@@ -54,31 +110,32 @@ export const handleRandomTabuSearch = ({setNumOfCourses,
   setBeta,
   setDeltas,
   setIsRandom,
-}) =>{
-
+}) => {
   const randomNumOfCourses = getRandomNumOfCourses();
   const randomNumOfStudents = getRandomNumOfStudents();
 
   console.log("random Num Of Courses: ", randomNumOfCourses);
   console.log("random Num Of Students: ", randomNumOfStudents);
 
-  const randomCoursesCapacities = getRandomCoursesCapacities(randomNumOfCourses);
+  const randomCoursesCapacities =
+    getRandomCoursesCapacities(randomNumOfCourses);
   const randomBudgets = getRandomBudgets(randomNumOfStudents);
   const randomCoursesToTake = getRandomCoursesToTake(randomNumOfStudents);
-
 
   console.log("Courses Capacities:", randomCoursesCapacities);
   console.log("Budgets:", randomBudgets);
   console.log("Courses to Take:", randomCoursesToTake);
 
-  const randomRatings = getRandomRatings(randomNumOfStudents, randomNumOfCourses);
+  const randomRatings = getRandomRatings(
+    randomNumOfStudents,
+    randomNumOfCourses
+  );
   console.log("Ratings:", randomRatings);
 
-  const [randomBeta, randomDeltas] = getRandomTabuSeachParameters()
+  const [randomBeta, randomDeltas] = getRandomTabuSeachParameters();
   console.log("Beta:", randomBeta);
   console.log("Deltas:", randomDeltas);
 
-  
   setNumOfCourses(randomNumOfCourses);
   setCoursesCapacities(randomCoursesCapacities);
   setNumOfStudents(randomNumOfStudents);
@@ -89,12 +146,14 @@ export const handleRandomTabuSearch = ({setNumOfCourses,
   setDeltas(randomDeltas);
 
   setIsRandom(true);
+};
 
-}
-
-
-
-export const handleSubmit = async (e, formData, setResults, setDisplayResults) => {
+export const handleSubmit = async (
+  e,
+  formData,
+  setResults,
+  setDisplayResults
+) => {
   console.log("in handleSubmit");
 
   e.preventDefault();
@@ -132,6 +191,7 @@ const maxRating = 31;
 const maxEpsilon = 0.1;
 const maxDelta = 0.5;
 const maxBeta = 16;
+const maxEta = 16;
 
 const getRandomNumOfCourses = () => {
   return Math.floor(Math.random() * maxNumOfCourses) + 1;
@@ -173,7 +233,7 @@ const getRandomRatings = (numOfStudents, numOfCourses) => {
       Object.fromEntries(
         Array.from({ length: numOfCourses }, (_, j) => [
           `c${j + 1}`,
-          Math.floor(Math.random() * maxRating) + 1 ,
+          Math.floor(Math.random() * maxRating) + 1,
         ])
       ),
     ])
@@ -193,15 +253,31 @@ const getRandomAceeiParemeters = () => {
   return [randomEpsilon, randomDelta, randomEftbStatus];
 };
 
-
 const getRandomTabuSeachParameters = () => {
   const randomBeta = Math.floor(Math.random() * maxBeta) + 1;
-  const numOfDelats = Math.floor(Math.random() * 3) + 1
-  const randomDeltas = []
+  const numOfDelats = Math.floor(Math.random() * 3) + 1;
+  const randomDeltas = [];
   for (let i = 0; i < numOfDelats; i++) {
-    const delta = (Math.random() * maxDelta) + 0.1; 
+    const delta = Math.random() * maxDelta + 0.1;
     randomDeltas.push(delta);
   }
 
-  return [randomBeta, randomDeltas]
-}
+  return [randomBeta, randomDeltas];
+};
+
+const getRandomFindManipulationParameters = (numOfStudents) => {
+  const randomEta = Math.floor(Math.random() * maxEta) + 1;
+  const randomBeta = Math.floor(Math.random() * maxBeta) + 1;
+
+  const randomIndex = Math.floor(Math.random() * numOfStudents) + 1;
+  const randomChoosenStudent = `s${randomIndex}`;
+
+  const cretiriaOptions = [
+    "criteria_for_profitable_manipulation.randomness",
+    "criteria_for_profitable_manipulation.population",
+  ];
+  const randomCretiria =
+    cretiriaOptions[Math.floor(Math.random() * cretiriaOptions.length)];
+
+  return [randomEta, randomBeta, randomChoosenStudent, randomCretiria];
+};

@@ -25,13 +25,13 @@ export default function FindManipulationForm({ setSelectedAlgorithm }) {
   const [delta, setDelta] = useState(0);
   const [eftbStatus, setEftbStatus] = useState("no-eftb");
   const [choosenStudent, setChoosenStudent] = useState("");
-  const [eta, setEta] = useState(1);
+  const [eta, setEta] = useState(0);
   const [beta, setBeta] = useState(1);
   const [cretiriaForManipulation, setCretiriaForManipulation] = useState("");
 
   const [isRandom, setIsRandom] = useState(false);
 
-  const algoName = "Find Fanipulation";
+  const algoName = "Find Manipulation";
   let formData = {
     coursesCapacities,
     budgets,
@@ -115,7 +115,7 @@ export default function FindManipulationForm({ setSelectedAlgorithm }) {
                   required
                 >
                   {Array.from({ length: numOfStudents }, (_, i) => (
-                    <option value={`s${i + 1}`}>{`Student ${i + 1}`}</option>
+                    <option key={i} value={`s${i + 1}`}>{`Student ${i + 1}`}</option>
                   ))}
                 </select>
               </div>

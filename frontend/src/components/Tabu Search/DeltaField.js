@@ -21,7 +21,7 @@ export default function DeltaField({ deltas, handleDeltaChange, index, setDeltas
         name={`delta-${index + 1}`}
         step="0.001"
         min="0.001"
-        // value={deltas[index] || 0}
+        value={deltas[index]}
         onChange={(e) => handleDeltaChange(e, index + 1)}
         required
       />

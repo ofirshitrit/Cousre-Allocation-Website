@@ -33,7 +33,7 @@ export default function RandomPart({ parameters }) {
             if (algoName === "ACEEI") {
               const {
                 setEpsilon,
-                setDelate,
+                setDelta,
                 setEftbStatus,
               } = parameters;
             
@@ -45,26 +45,37 @@ export default function RandomPart({ parameters }) {
                 setCoursesToTake,
                 setRatings,
                 setEpsilon,
-                setDelate,
+                setDelta,
                 setEftbStatus,
                 setIsRandom,
               });
             } else if (algoName === "Find Manipulation") {
               const {
                 setEpsilon,
-                setDelate,
+                setDelta,
                 setEftbStatus,
                 setEta,
                 setBeta,
-                // TODO: FILL THIS FOR MANIPULATION
+                setChoosenStudent,
+                setCretiriaForManipulation,
               } = parameters;
 
               handleRandomFindManipulation({
+                setNumOfCourses,
+                setCoursesCapacities,
                 setNumOfStudents,
                 setBudgets,
                 setCoursesToTake,
                 setRatings,
+                setEpsilon,
+                setDelta,
+                setEftbStatus,
+                setEta,
+                setBeta,
+                setChoosenStudent,
+                setCretiriaForManipulation,
                 setIsRandom,
+
               });
             } else if (algoName === "Tabu Search") {
               const {

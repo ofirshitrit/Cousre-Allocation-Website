@@ -10,11 +10,11 @@ export default function FindManipulationParameters({
 }) {
 
   const handleEtaChange = (e) => {
-    setEta(parseInt(e.target.value) || 0)
+    setEta(parseInt(e.target.value))
   }
 
   const handleBetaChange = (e) => {
-    setBeta(parseInt(e.target.value) || 0)
+    setBeta(parseInt(e.target.value))
   }
 
   const handlecretiriaForManipulationChange = (e) => {
@@ -29,8 +29,8 @@ export default function FindManipulationParameters({
           type="number"
           id="eta"
           name="eta"
-          step="0.001"
-          min="0.001"
+          step="1"
+          min="1"
           value={eta}
           onChange={handleEtaChange}
           required
@@ -43,8 +43,8 @@ export default function FindManipulationParameters({
           type="number"
           id="beta"
           name="beta"
-          step="0.001"
-          min="0.001"
+          step="1"
+          min="1"
           value={beta}
           onChange={handleBetaChange}
           required

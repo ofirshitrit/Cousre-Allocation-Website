@@ -8,8 +8,8 @@ export default function TabuSearchParameters({
   beta,
 }) {
 
-
   const [deltaComponents, setDeltaComponents] = useState([]);
+
 
   const handleBetaChange = (e) => {
     setBeta(parseInt(e.target.value) || 0);
@@ -23,6 +23,12 @@ export default function TabuSearchParameters({
     setDeltas(updatedDeltas);
   };
 
+  useEffect(()=>{
+    {deltaComponents.map((deltaComponent) => deltaComponent)}
+    console.log('====================================');
+    console.log("deltas changed", deltas);
+    console.log('====================================');
+  }, [deltas])
 
   const addDelta = () => {
     setDeltaComponents((prev) => [
@@ -58,6 +64,7 @@ export default function TabuSearchParameters({
       </div>
 
       <div className="fields-container">
+
         <label htmlFor="delta">Delta (δ):</label>
         <input
           className="delta-input"
@@ -66,6 +73,7 @@ export default function TabuSearchParameters({
           name="delta"
           step="0.001"
           min="0.001"
+          value={deltas[0]}
           onChange={(e) => {
             handleDeltaChange(e, 0);
           }}
@@ -78,6 +86,9 @@ export default function TabuSearchParameters({
 
 
       {deltaComponents.map((deltaComponent) => deltaComponent)}
+
+
+
     </div>
   );
 }
