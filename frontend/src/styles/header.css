@@ -61,6 +61,8 @@ button.homeBtn:hover {
   font-weight: bold;
   width: 90px;
   height: 40px;
+  transition: background 0.2s ease-in-out, transform 0.2s ease-in-out;
+
 }
 
 #home-btn:hover {

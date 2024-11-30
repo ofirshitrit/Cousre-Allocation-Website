@@ -44,6 +44,7 @@ export default function TabuSearchParameters({
         setDeltaComponents={setDeltaComponents}
       />,
     ]);
+
   };
 
   return (
