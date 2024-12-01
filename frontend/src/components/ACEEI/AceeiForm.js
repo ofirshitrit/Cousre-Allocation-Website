@@ -104,6 +104,7 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
           data={results}
           setSelectedAlgorithm={setSelectedAlgorithm}
           algoName={"ACEEI"}
+          setDisplayResults={setDisplayResults}
         />
       )}
     </>

@@ -119,6 +119,7 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
           data={results}
           setSelectedAlgorithm={setSelectedAlgorithm}
           algoName={"Tabu Search"}
+          setDisplayResults={setDisplayResults}
         />
       )}
     </>

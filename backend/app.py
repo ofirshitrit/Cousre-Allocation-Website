@@ -111,7 +111,7 @@ def get_find_manipulation_results(form_data):
     
     log_messages, status = log_capture_handler.extract_manipulation_status()
 
-    return {"results": results, "status": status}
+    return {"status": status}
 
 def get_tabu_search_parameters(form_data):
     courses_capacities = form_data['coursesCapacities']

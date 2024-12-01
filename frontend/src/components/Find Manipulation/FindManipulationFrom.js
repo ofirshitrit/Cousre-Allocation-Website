@@ -151,6 +151,7 @@ export default function FindManipulationForm({ setSelectedAlgorithm }) {
           data={manipulationStatus}
           setSelectedAlgorithm={setSelectedAlgorithm}
           algoName={"Find Maipulation"}
+          setDisplayResults={setDisplayResults}
         />
       )}
     </>

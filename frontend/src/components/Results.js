@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import '../styles/results.css'
 
-export default function Results({ data, setSelectedAlgorithm, algoName }) {
+export default function Results({ data, setSelectedAlgorithm, algoName, setDisplayResults }) {
   
   const renderCourses = (courses) => {
     return Object.keys(courses).map(courseId => {
@@ -14,7 +14,17 @@ export default function Results({ data, setSelectedAlgorithm, algoName }) {
       return "Student " + studentId.slice(1);;
   };
 
-  
+  const handleTryAgainButton = () => {
+      if (algoName === 'ACEEI') {
+        setSelectedAlgorithm('aceei')
+      } else if (algoName === 'Tabu Search') {
+        setSelectedAlgorithm('tabusearch')
+      }
+      else {
+        setSelectedAlgorithm('')
+      }
+      setDisplayResults(false)
+  }
   return (
     <>
       <Header
@@ -42,7 +52,12 @@ export default function Results({ data, setSelectedAlgorithm, algoName }) {
               ))}
             </tbody>
           </table>
+          <button className="try-again-button" onClick={handleTryAgainButton}>
+          Try The Algorithm Again
+          </button>
         </div>
+
+        
       </div>        
     </>
   );

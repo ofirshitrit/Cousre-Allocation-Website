@@ -76,12 +76,7 @@ export const handleRandomFindManipulation = ({
   const [randomEta, randomBeta, randomChoosenStudent, randomCretiria] =
     getRandomFindManipulationParameters(randomNumOfStudents);
 
-  console.log('====================================');
-  console.log("randomEta", randomEta);
-  console.log("randomBeta", randomBeta);
-  console.log("randomChoosenStudent", randomChoosenStudent);
-  console.log("randomCretiria", randomCretiria);
-  console.log('====================================');
+
 
   setNumOfCourses(randomNumOfCourses);
   setCoursesCapacities(randomCoursesCapacities);
@@ -118,27 +113,19 @@ export const handleRandomTabuSearch = ({
   const randomNumOfCourses = getRandomNumOfCourses();
   const randomNumOfStudents = getRandomNumOfStudents();
 
-  console.log("random Num Of Courses: ", randomNumOfCourses);
-  console.log("random Num Of Students: ", randomNumOfStudents);
 
   const randomCoursesCapacities =
     getRandomCoursesCapacities(randomNumOfCourses);
   const randomBudgets = getRandomBudgets(randomNumOfStudents);
   const randomCoursesToTake = getRandomCoursesToTake(randomNumOfStudents);
 
-  console.log("Courses Capacities:", randomCoursesCapacities);
-  console.log("Budgets:", randomBudgets);
-  console.log("Courses to Take:", randomCoursesToTake);
 
   const randomRatings = getRandomRatings(
     randomNumOfStudents,
     randomNumOfCourses
   );
-  console.log("Ratings:", randomRatings);
 
   const [randomBeta, randomDeltas, randomDeltaComponents] = getRandomTabuSeachParameters(deltas, handleDeltaChange, deltaComponents, setDeltas, setDeltaComponents);
-  console.log("Beta:", randomBeta);
-  console.log("Deltas:", randomDeltas);
 
   setNumOfCourses(randomNumOfCourses);
   setCoursesCapacities(randomCoursesCapacities);
@@ -159,7 +146,6 @@ export const handleSubmit = async (
   setDisplayResults,
   setManipulationStatus
 ) => {
-  console.log("in handleSubmit");
 
   e.preventDefault();
 
@@ -178,7 +164,7 @@ export const handleSubmit = async (
     if (response.ok) {
       const jsonResponse = await response.json();
       if (formData["algoName"] === "Find Manipulation") {
-        setManipulationStatus(jsonResponse.status)
+        setManipulationStatus(jsonResponse.results.status)
       } else {
         setResults(jsonResponse.results);
       }
@@ -265,7 +251,6 @@ const getRandomAceeiParemeters = () => {
 const getRandomTabuSeachParameters = (deltas, handleDeltaChange, deltaComponents, setDeltas, setDeltaComponents) => {
   const randomBeta = Math.floor(Math.random() * maxBeta) + 1;
   const numOfDelats = Math.floor(Math.random() * 3) + 1;
-  console.log("num Of Delats: ", numOfDelats)
   const randomDeltas = [];
   const randomDeltaComponents =[]
   for (let i = 0; i < numOfDelats; i++) {

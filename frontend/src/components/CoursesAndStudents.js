@@ -103,7 +103,6 @@ export default function CoursesAndStudents({
 
       newState[`s${studentIndex}`][`c${courseIndex}`] = rating;
 
-      console.log(newState);
       return newState;
     });
   };
