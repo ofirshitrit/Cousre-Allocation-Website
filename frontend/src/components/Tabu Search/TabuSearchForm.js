@@ -28,6 +28,7 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
 
 
   const [isRandom, setIsRandom] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const algoName = "Tabu Search";
   let formData = {
@@ -58,8 +59,16 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
             inHomePage={false}
           />
           <form
-            onSubmit={(e) =>
-              handleSubmit(e, formData, setResults, setDisplayResults)
+            onSubmit={(e) => {
+              const parameters = [
+                e,
+                formData,
+                setResults,
+                setDisplayResults,
+                setLoading,
+              ];
+              handleSubmit(parameters)
+            }
             }
             id="tabuSearchForm"
             className="form-container"
@@ -111,6 +120,12 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
 
             <input className="run-button" type="submit" value="Run" />
           </form>
+
+          {loading && (
+            <div className="loading-modal">
+              <p>Loading...</p>
+            </div>
+          )}
         </>
       )}
 

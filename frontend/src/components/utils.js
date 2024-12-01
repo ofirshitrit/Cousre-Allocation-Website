@@ -139,17 +139,17 @@ export const handleRandomTabuSearch = ({
   setIsRandom(true);
 };
 
-export const handleSubmit = async (
-  e,
-  formData,
-  setResults,
-  setDisplayResults,
-  setManipulationStatus
-) => {
+export const handleSubmit = async (parameters) => {
+  const [e,formData,setResults, setDisplayResults,setLoading, manipulationStatusObj ] = parameters
 
+  const { setManipulationStatus } = manipulationStatusObj || {};
+    
+    
   e.preventDefault();
 
   const data = Object.fromEntries(Object.entries(formData));
+  
+  setLoading(true);
 
   try {
     // Send data to Flask backend
@@ -174,6 +174,8 @@ export const handleSubmit = async (
     }
   } catch (error) {
     console.error("Error submitting form:", error);
+  }finally {
+    setLoading(false);
   }
 };
 

@@ -33,6 +33,8 @@ export default function FindManipulationForm({ setSelectedAlgorithm }) {
 
   const [isRandom, setIsRandom] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
   const algoName = "Find Manipulation";
   let formData = {
     coursesCapacities,
@@ -63,9 +65,18 @@ export default function FindManipulationForm({ setSelectedAlgorithm }) {
             inHomePage={false}
           />
           <form
-            onSubmit={(e) =>
-              handleSubmit(e, formData, setResults, setDisplayResults, setManipulationStatus)
-            }
+            onSubmit={(e) => {
+              const parameters = [
+                e,
+                formData,
+                setResults,
+                setDisplayResults,
+                setLoading,
+                { setManipulationStatus },
+              ];
+
+              handleSubmit(parameters);
+            }}
             id="findManipulationForm"
             className="form-container"
           >
@@ -117,7 +128,9 @@ export default function FindManipulationForm({ setSelectedAlgorithm }) {
                   required
                 >
                   {Array.from({ length: numOfStudents }, (_, i) => (
-                    <option key={i} value={`s${i + 1}`}>{`Student ${i + 1}`}</option>
+                    <option key={i} value={`s${i + 1}`}>{`Student ${
+                      i + 1
+                    }`}</option>
                   ))}
                 </select>
               </div>
@@ -143,6 +156,12 @@ export default function FindManipulationForm({ setSelectedAlgorithm }) {
 
             <input className="run-button" type="submit" value="Run" />
           </form>
+
+          {loading && (
+            <div className="loading-modal">
+              <p>Loading...</p>
+            </div>
+          )}
         </>
       )}
 

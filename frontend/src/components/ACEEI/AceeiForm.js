@@ -24,6 +24,7 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
   const [eftbStatus, setEftbStatus] = useState("no-eftb");
 
   const [isRandom, setIsRandom] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const algoName = "ACEEI";
   let formData = {
@@ -48,7 +49,16 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
           />
           <form
             onSubmit={(e) =>
-              handleSubmit(e, formData, setResults, setDisplayResults)
+              {
+                const parameters = [
+                  e,
+                  formData,
+                  setResults,
+                  setDisplayResults,
+                  setLoading,
+                ];
+                handleSubmit(parameters)
+              }
             }
             id="aceeiForm"
             className="form-container"
@@ -96,6 +106,12 @@ export default function AceeiForm({ setSelectedAlgorithm }) {
 
             <input className="run-button" type="submit" value="Run" />
           </form>
+
+          {loading && (
+            <div className="loading-modal">
+              <p>Loading...</p>
+            </div>
+          )}
         </>
       )}
 
