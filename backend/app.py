@@ -5,7 +5,18 @@ from fairpyx.algorithms import find_ACEEI_with_EFTB, tabu_search
 from fairpyx.algorithms.ACEEI_algorithms.find_profitable_manipulation import find_profitable_manipulation
 from fairpyx.adaptors import divide
 from fairpyx.algorithms.ACEEI_algorithms.ACEEI import EFTBStatus
+import logging
+from LogCaptureHandler import *
 
+# Create and configure the logger
+log_capture_handler = LogCaptureHandler()
+log_capture_handler.setLevel(logging.INFO)
+formatter = logging.Formatter('%(message)s')
+log_capture_handler.setFormatter(formatter)
+
+logger = logging.getLogger()
+logger.addHandler(log_capture_handler)
+logger.setLevel(logging.INFO)
 
 app = Flask(__name__)
 CORS(app)
@@ -34,6 +45,7 @@ def process_form():
         elif algoName == "Find Manipulation":
             print("In Find Manipulation!")
             results = get_find_manipulation_results(form_data)
+          
         
         
         elif algoName == "Tabu Search":
@@ -96,7 +108,10 @@ def get_find_manipulation_results(form_data):
                                           criteria=criteria_for_manipulation, eta=eta, instance=instance,
                                           initial_budgets=initial_budgets, beta=beta, delta=delta, epsilon=epsilon,
                                           t=eftbStatus)
-    return results
+    
+    log_messages, status = log_capture_handler.extract_manipulation_status()
+
+    return {"results": results, "status": status}
 
 def get_tabu_search_parameters(form_data):
     courses_capacities = form_data['coursesCapacities']

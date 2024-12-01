@@ -156,7 +156,8 @@ export const handleSubmit = async (
   e,
   formData,
   setResults,
-  setDisplayResults
+  setDisplayResults,
+  setManipulationStatus
 ) => {
   console.log("in handleSubmit");
 
@@ -176,7 +177,11 @@ export const handleSubmit = async (
 
     if (response.ok) {
       const jsonResponse = await response.json();
-      setResults(jsonResponse.results);
+      if (formData["algoName"] === "Find Manipulation") {
+        setManipulationStatus(jsonResponse.status)
+      } else {
+        setResults(jsonResponse.results);
+      }
       setDisplayResults(true);
     } else {
       console.error("Failed to submit form.");

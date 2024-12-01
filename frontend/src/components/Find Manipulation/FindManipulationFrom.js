@@ -6,11 +6,13 @@ import AceeiParameters from "../ACEEI/AceeiParameters";
 import RandomPart from "../RandomPart";
 import { handleSubmit } from "../utils";
 import FindManipulationParameters from "./FindManipulationParameters";
+import FindManipulationResults from "../FindManipulationResults";
 
 // TODO: add all the FindManipulationForm parameters
 // TODO: fix the GUI
 export default function FindManipulationForm({ setSelectedAlgorithm }) {
   const [results, setResults] = useState(null);
+  const [manipulationStatus, setManipulationStatus] = useState("");
   const [displayResults, setDisplayResults] = useState(false);
 
   const [numOfCourses, setNumOfCourses] = useState(0);
@@ -62,7 +64,7 @@ export default function FindManipulationForm({ setSelectedAlgorithm }) {
           />
           <form
             onSubmit={(e) =>
-              handleSubmit(e, formData, setResults, setDisplayResults)
+              handleSubmit(e, formData, setResults, setDisplayResults, setManipulationStatus)
             }
             id="findManipulationForm"
             className="form-container"
@@ -145,8 +147,8 @@ export default function FindManipulationForm({ setSelectedAlgorithm }) {
       )}
 
       {displayResults === true && (
-        <Results
-          data={results}
+        <FindManipulationResults
+          data={manipulationStatus}
           setSelectedAlgorithm={setSelectedAlgorithm}
           algoName={"Find Maipulation"}
         />
