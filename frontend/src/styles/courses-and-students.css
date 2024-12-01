@@ -6,21 +6,20 @@
   font-size: 1.2em;
 }
 
-/* Button Styles */
-.V-Btn {
-  width: 40px;
-  height: 30px;
+
+
+.course-capacities-button, .students-fildes-button {
   background: #86b9e8;
   transition: background 0.1s ease-in-out, transform 0.2s ease-in-out;
   border: none;
   border-radius: 3px;
-  color: #fff;
-  font-size: 1.2em;
   cursor: pointer;
-  padding-bottom: 8px;
+  color: #fff;
+  padding: 8px;
+  font-weight: bold;
 }
 
-.V-Btn:hover {
+.course-capacities-button:hover, .students-fildes-button:hover {
   background: #3f6a72;
 }
 
