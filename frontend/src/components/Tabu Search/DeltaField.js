@@ -11,6 +11,7 @@ export default function DeltaField({ deltas, handleDeltaChange, index, setDeltas
     setDeltas(updatedDeltas);
   };
 
+
   return (
     <div className="fields-container">
       <label htmlFor={`delta-${index + 1}`}>Delta (δ):</label>

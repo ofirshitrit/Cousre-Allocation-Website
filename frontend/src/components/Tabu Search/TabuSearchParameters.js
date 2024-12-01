@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import DeltaField from "./DeltaField";
 
 export default function TabuSearchParameters({
@@ -6,29 +6,17 @@ export default function TabuSearchParameters({
   deltas,
   setDeltas,
   beta,
+  deltaComponents,
+  setDeltaComponents,
+  handleDeltaChange,
 }) {
 
-  const [deltaComponents, setDeltaComponents] = useState([]);
 
 
   const handleBetaChange = (e) => {
     setBeta(parseInt(e.target.value) || 0);
   };
-
     
-  const handleDeltaChange = (e, index) => {
-    const newDelta = parseFloat(e.target.value) || 0;
-    const updatedDeltas = [...deltas];
-    updatedDeltas[index] = newDelta;
-    setDeltas(updatedDeltas);
-  };
-
-  useEffect(()=>{
-    {deltaComponents.map((deltaComponent) => deltaComponent)}
-    console.log('====================================');
-    console.log("deltas changed", deltas);
-    console.log('====================================');
-  }, [deltas])
 
   const addDelta = () => {
     setDeltaComponents((prev) => [
@@ -38,7 +26,7 @@ export default function TabuSearchParameters({
         id={prev.length + 1}
         deltas={deltas}
         handleDeltaChange={handleDeltaChange}
-        index={prev.length}
+        index={prev.length + 1}
         setDeltas={setDeltas}
         deltaComponents={deltaComponents}
         setDeltaComponents={setDeltaComponents}

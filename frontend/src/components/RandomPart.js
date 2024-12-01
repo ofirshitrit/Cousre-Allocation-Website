@@ -81,6 +81,10 @@ export default function RandomPart({ parameters }) {
               const {
                 setBeta,
                 setDeltas,
+                setDeltaComponents,
+                deltas, 
+                handleDeltaChange, 
+                deltaComponents,
               } = parameters;
 
               handleRandomTabuSearch({
@@ -92,6 +96,10 @@ export default function RandomPart({ parameters }) {
                 setRatings,
                 setBeta,
                 setDeltas,
+                setDeltaComponents,
+                deltas, 
+                handleDeltaChange, 
+                deltaComponents,
                 setIsRandom,
               });
             } else {

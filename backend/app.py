@@ -32,10 +32,12 @@ def process_form():
             results = get_aceei_results(form_data)
         
         elif algoName == "Find Manipulation":
+            print("In Find Manipulation!")
             results = get_find_manipulation_results(form_data)
         
         
-        elif algoName == "Tabu Searcg":
+        elif algoName == "Tabu Search":
+            print("In Tabu Search!")
             results = get_tabu_search_results(form_data)
         else:
             results = "The Algorithm name is not correct. Try Again."
@@ -76,24 +78,24 @@ def get_find_manipulation_parameters(form_data):
     agent_capacity = form_data['coursesToTake']
     valuations = form_data['ratings']
     epsilon = form_data['epsilon']
-    delta = form_data['delta']
     eftbStatus = form_data['eftbStatus']
+    delta = form_data['delta']
     eta = form_data["eta"]
-    criteria_for_manipulation = form_data["criteria_for_manipulation"]
+    choosen_student = form_data["choosenStudent"]
+    beta = form_data["beta"]
+    criteria_for_manipulation = form_data["cretiriaForManipulation"]
+    return  [courses_capacities, initial_budgets, agent_capacity, valuations, epsilon,delta,  eftbStatus, eta,choosen_student,beta,  criteria_for_manipulation]
 
-    return  [courses_capacities, initial_budgets, agent_capacity, valuations, epsilon,delta,  eftbStatus, eta, criteria_for_manipulation]
 
-
-# TODO: Finish the find_manipulation connection
 def get_find_manipulation_results(form_data):
-    [courses_capacities, initial_budgets, agent_capacity, valuations, epsilon,delta,  eftbStatus, eta, criteria_for_manipulation] = get_find_manipulation_parameters(form_data)
+    [courses_capacities, initial_budgets, agent_capacity, valuations, epsilon,delta,  eftbStatus, eta,choosen_student,beta,  criteria_for_manipulation]= get_find_manipulation_parameters(form_data)
     instance = Instance(valuations, agent_capacity, item_capacities=courses_capacities)
     algorithm = find_ACEEI_with_EFTB
-    results = find_profitable_manipulation(mechanism=algorithm, student=student,
-                                          true_student_utility=valuations[student],
-                                          criteria=criteria, eta=eta, instance=instance,
+    results = find_profitable_manipulation(mechanism=algorithm, student=choosen_student,
+                                          true_student_utility=valuations[choosen_student],
+                                          criteria=criteria_for_manipulation, eta=eta, instance=instance,
                                           initial_budgets=initial_budgets, beta=beta, delta=delta, epsilon=epsilon,
-                                          t=eftb)
+                                          t=eftbStatus)
     return results
 
 def get_tabu_search_parameters(form_data):
@@ -103,11 +105,18 @@ def get_tabu_search_parameters(form_data):
     valuations = form_data['ratings']
     beta = form_data['beta']
     deltas = form_data['deltas']
-
+    
     return [courses_capacities, initial_budgets, agent_capacity, valuations, beta, deltas]
 
 def get_tabu_search_results(form_data):
     courses_capacities, initial_budgets, agent_capacity, valuations, beta, deltas = get_tabu_search_parameters(form_data)
+    print("Courses Capacities:", courses_capacities)
+    print("Initial Budgets:", initial_budgets)
+    print("Agent Capacity:", agent_capacity)
+    print("Valuations:", valuations)
+    print("Beta:", beta)
+    print("Deltas:", deltas)
+
     instance = Instance(valuations, agent_capacity, item_capacities=courses_capacities)
     results =  divide(tabu_search, instance=instance, initial_budgets=initial_budgets, beta=beta, delta=deltas)
 

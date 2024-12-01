@@ -8,6 +8,8 @@ import RandomPart from "../RandomPart";
 import { handleSubmit } from "../utils";
 
 // TODO: fix the GUI
+
+// TODO: delta not working on ransom - FIX IT!
 export default function TabuSearchForm({ setSelectedAlgorithm }) {
   const [results, setResults] = useState(null);
   const [displayResults, setDisplayResults] = useState(false);
@@ -22,6 +24,7 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
 
   const [beta, setBeta] = useState(0);
   const [deltas, setDeltas] = useState([]);
+  const [deltaComponents, setDeltaComponents] = useState([]);
 
 
   const [isRandom, setIsRandom] = useState(false);
@@ -37,6 +40,14 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
     algoName,
   };
 
+  const handleDeltaChange = (e, index) => {
+    const newDelta = parseFloat(e.target.value) || 0;
+    const updatedDeltas = [...deltas];
+    updatedDeltas[index] = newDelta;
+    setDeltas(updatedDeltas);
+  };
+
+ 
   return (
     <>
       {displayResults === false && (
@@ -64,6 +75,10 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
                 setRatings,
                 setBeta,
                 setDeltas,
+                setDeltaComponents,
+                deltas, 
+                handleDeltaChange, 
+                deltaComponents,
                 setIsRandom,
               }}
             />
@@ -89,6 +104,9 @@ export default function TabuSearchForm({ setSelectedAlgorithm }) {
               deltas={deltas}
               setDeltas={setDeltas}
               beta={beta}
+              deltaComponents={deltaComponents}
+              setDeltaComponents={setDeltaComponents}
+              handleDeltaChange={handleDeltaChange}
             />
 
             <input className="run-button" type="submit" value="Run" />

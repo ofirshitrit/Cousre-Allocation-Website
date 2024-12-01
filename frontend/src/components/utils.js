@@ -109,6 +109,10 @@ export const handleRandomTabuSearch = ({
   setRatings,
   setBeta,
   setDeltas,
+  setDeltaComponents,
+  deltas, 
+  handleDeltaChange, 
+  deltaComponents,
   setIsRandom,
 }) => {
   const randomNumOfCourses = getRandomNumOfCourses();
@@ -132,7 +136,7 @@ export const handleRandomTabuSearch = ({
   );
   console.log("Ratings:", randomRatings);
 
-  const [randomBeta, randomDeltas] = getRandomTabuSeachParameters();
+  const [randomBeta, randomDeltas, randomDeltaComponents] = getRandomTabuSeachParameters(deltas, handleDeltaChange, deltaComponents, setDeltas, setDeltaComponents);
   console.log("Beta:", randomBeta);
   console.log("Deltas:", randomDeltas);
 
@@ -144,7 +148,7 @@ export const handleRandomTabuSearch = ({
   setRatings(randomRatings);
   setBeta(randomBeta);
   setDeltas(randomDeltas);
-
+  setDeltaComponents(randomDeltaComponents)
   setIsRandom(true);
 };
 
@@ -253,16 +257,34 @@ const getRandomAceeiParemeters = () => {
   return [randomEpsilon, randomDelta, randomEftbStatus];
 };
 
-const getRandomTabuSeachParameters = () => {
+const getRandomTabuSeachParameters = (deltas, handleDeltaChange, deltaComponents, setDeltas, setDeltaComponents) => {
   const randomBeta = Math.floor(Math.random() * maxBeta) + 1;
   const numOfDelats = Math.floor(Math.random() * 3) + 1;
+  console.log("num Of Delats: ", numOfDelats)
   const randomDeltas = [];
+  const randomDeltaComponents =[]
   for (let i = 0; i < numOfDelats; i++) {
-    const delta = Math.random() * maxDelta + 0.1;
+    const delta = parseFloat((Math.random() * maxDelta + 0.1).toFixed(3));
     randomDeltas.push(delta);
   }
 
-  return [randomBeta, randomDeltas];
+  for (let i = 1; i < numOfDelats; i++) {
+    randomDeltaComponents.push(
+      <DeltaField 
+        key={i}
+        id={i + 1}
+        deltas={randomDeltas}
+        handleDeltaChange={handleDeltaChange}
+        index={i}
+        setDeltas={setDeltas}
+        deltaComponents={randomDeltaComponents}
+        setDeltaComponents={setDeltaComponents}
+      />)
+  }
+
+  
+
+  return [randomBeta, randomDeltas, randomDeltaComponents];
 };
 
 const getRandomFindManipulationParameters = (numOfStudents) => {
